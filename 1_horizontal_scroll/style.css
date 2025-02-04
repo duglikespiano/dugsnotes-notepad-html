@@ -1,0 +1,36 @@
+body {
+	width: 100%;
+	height: 100vh;
+	/* overflow-x: hidden; */
+	margin: 0;
+}
+
+.box {
+	width: 100%;
+	height: 100vh;
+}
+
+.top {
+	background-color: greenyellow;
+}
+.horizontal-scroll {
+	background: linear-gradient(to right, gold, skyblue);
+	display: flex;
+}
+
+.inner1 {
+	background-color: aqua;
+	flex-shrink: 0;
+}
+.inner2 {
+	background-color: brown;
+	flex-shrink: 0;
+}
+.inner3 {
+	background-color: thistle;
+	flex-shrink: 0;
+}
+.inner4 {
+	background-color: tomato;
+	flex-shrink: 0;
+}
