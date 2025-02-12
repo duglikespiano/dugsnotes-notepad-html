@@ -34,3 +34,4 @@
 
 1. horizontal scroll
 2. animation timeline view
+3. menu button
