@@ -1,0 +1,9 @@
+body {
+	padding-top: 100vh;
+	margin: 0;
+}
+
+.container {
+	width: 500px;
+	aspect-ratio: 1/1;
+}

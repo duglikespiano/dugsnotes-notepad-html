@@ -36,3 +36,4 @@
 2. animation timeline view
 3. menu button
 4. overlay scrollbars and modal
+5. chart.js
