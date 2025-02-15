@@ -37,3 +37,4 @@
 3. menu button
 4. overlay scrollbars and modal
 5. chart.js
+6. sticky block

@@ -1,0 +1,40 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+}
+
+.spacer {
+	width: 100%;
+	height: 200vh;
+	background-color: pink;
+}
+
+.sticky-container {
+	background-color: rgb(118, 151, 69);
+}
+
+.area {
+	width: 100%;
+	height: 200vh;
+	border: 1px solid black;
+}
+
+.sticky-block-container {
+	border: 2px solid black;
+}
+
+.area1 .sticky-block-container {
+	display: inline-block;
+	width: 300px;
+	padding-top: 100px;
+	margin-left: 500px;
+}
+
+.area1 .sticky-block-container .sticky-block {
+	height: 300px;
+	background-color: aquamarine;
+}
