@@ -1,0 +1,10 @@
+body {
+	width: 100%;
+	height: 10000vh;
+	margin: 0;
+}
+
+#turtle {
+	position: fixed;
+	top: 100px;
+}
