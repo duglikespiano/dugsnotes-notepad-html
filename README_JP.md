@@ -40,3 +40,4 @@
 6. sticky block
 7. commit history
 8. turtle animation
+9. find strings in brackets
