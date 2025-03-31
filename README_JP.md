@@ -42,3 +42,4 @@
 8. turtle animation
 9. find strings in brackets
 10. infinite flow elements
+11. infinite flow elements with slider
