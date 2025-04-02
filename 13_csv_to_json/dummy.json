@@ -1,0 +1,22 @@
+[
+ {
+  "Size": "Extra Small",
+  "AbbreviatedSize": "XS"
+ },
+ {
+  "Size": "Small",
+  "AbbreviatedSize": "S"
+ },
+ {
+  "Size": "Medium",
+  "AbbreviatedSize": "M"
+ },
+ {
+  "Size": "Large",
+  "AbbreviatedSize": "L"
+ },
+ {
+  "Size": "Extra Large",
+  "AbbreviatedSize": "XL"
+ }
+]
