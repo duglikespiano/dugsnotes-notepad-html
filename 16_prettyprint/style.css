@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+}
+
+.wrapper {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+pre.prettyprint {
+	padding: 1em; /* Adjust as needed */
+	margin: 0; /* Remove extra margin */
+	border-radius: 8px;
+	overflow: auto;
+	font-family: 'Fira Code', monospace;
+	font-size: 0.9em;
+	white-space: pre-wrap; /* Optional: for line wrapping */
+	tab-size: 2; /* Makes tab indentation smaller */
+}
+pre.prettyprint code {
+	padding: 0;
+	margin: 0;
+	display: block;
+}
