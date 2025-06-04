@@ -1,0 +1,35 @@
+body {
+	margin: 0;
+}
+
+/* Two css code snippet below have same result*/
+
+/* .container {
+	.child {
+		.box {
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+		}
+	}
+} */
+/* .container {
+	& .child {
+		& .box {
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+		}
+	}
+} */
+
+/* & should have a whitespace after it */
+.container {
+	& .child {
+		& .box {
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+		}
+	}
+}
