@@ -49,3 +49,4 @@
 15. dialog tag
 16. prettyprint
 17. css nesting
+18. simple javascript code snippet
