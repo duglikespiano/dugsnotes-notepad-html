@@ -52,3 +52,4 @@
 18. simple javascript code snippet
 19. consoletable
 20. object fromentries
+21. consoletime
