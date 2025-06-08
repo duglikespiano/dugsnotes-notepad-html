@@ -51,3 +51,4 @@
 17. css nesting
 18. simple javascript code snippet
 19. consoletable
+20. object fromentries
