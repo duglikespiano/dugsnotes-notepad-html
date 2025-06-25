@@ -54,3 +54,4 @@
 20. object fromentries
 21. consoletime
 22. swapping variables
+23. returning simple boolean
