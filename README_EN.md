@@ -1,4 +1,4 @@
-# dugsnotes-notepad(en)
+# dugsnotes-notepad-html(en)
 
 ##### [한국어 버전은 이 곳을 클릭해주세요](README.md)
 
@@ -14,7 +14,7 @@
 
 ### 1. Overview
 
-- Project title : dugsnotes-notepad
+- Project title : dugsnotes-notepad-html
 - Period : -
 - Member(s) : Dug Park
 - Tech stack : </br>

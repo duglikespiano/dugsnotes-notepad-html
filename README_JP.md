@@ -1,4 +1,4 @@
-# dugsnotes-notepad(jp)
+# dugsnotes-notepad-html(jp)
 
 ##### [한국어 버전은 이 곳을 클릭해주세요](README.md)
 
@@ -14,7 +14,7 @@
 
 ### 1. 概要
 
-- Project タイトル: dugsnotes-notepad
+- Project タイトル: dugsnotes-notepad-html
 - 期間 : -
 - 人員 : 1 人
 - 技術スタック : </br>

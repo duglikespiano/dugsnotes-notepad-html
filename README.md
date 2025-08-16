@@ -1,4 +1,4 @@
-# dugsnotes-notepad(kr)
+# dugsnotes-notepad-html(kr)
 
 ##### [Click here for English version](README_EN.md)
 
@@ -14,7 +14,7 @@
 
 ### 1. 개요
 
-- 프로젝트명 : dugsnotes-notepad
+- 프로젝트명 : dugsnotes-notepad-html
 - 기간 : -
 - 인원 : 1인
 - 기술스택 : </br>
