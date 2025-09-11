@@ -55,3 +55,4 @@
 21. consoletime
 22. swapping variables
 23. returning simple boolean
+24. array reduce
