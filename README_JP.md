@@ -57,3 +57,4 @@
 23. returning simple boolean
 24. array reduce
 25. drag and drop
+26. stacked container
