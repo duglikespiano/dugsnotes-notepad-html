@@ -56,3 +56,4 @@
 22. swapping variables
 23. returning simple boolean
 24. array reduce
+25. drag and drop

@@ -1,0 +1,41 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.wrapper {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-color: rgb(14, 13, 13);
+	align-items: center;
+	justify-content: center;
+}
+
+.empty {
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	border: 3px solid #fff;
+	background-color: #fff;
+}
+
+.fill {
+	width: 195px;
+	height: 195px;
+	background-image: url('image.jpg');
+	background-size: cover;
+	cursor: pointer;
+}
+
+.hovered {
+	background-color: green;
+	border: dashed 3px #fff;
+}
+
+@media (max-width: 800px) {
+	box {
+		flex-direction: column;
+	}
+}
