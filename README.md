@@ -60,3 +60,4 @@
 26. stacked container
 27. zooming viewport
 28. calendar
+29. lazy loading
