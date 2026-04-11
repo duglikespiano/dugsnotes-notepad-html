@@ -61,3 +61,4 @@
 27. zooming viewport
 28. calendar
 29. lazy loading
+30. slider in modal
