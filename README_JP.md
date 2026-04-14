@@ -62,3 +62,4 @@
 28. calendar
 29. lazy loading
 30. slider in modal
+31. google maps
