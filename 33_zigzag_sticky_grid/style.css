@@ -1,0 +1,38 @@
+body {
+	height: 100vh;
+	margin: 0;
+}
+
+.outter-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+img {
+	display: block;
+	width: 100%;
+}
+
+.inner-container {
+	position: relative;
+}
+
+.inner-container.left {
+	background-color: pink;
+}
+.inner-container.right {
+	background-color: aquamarine;
+}
+
+.inner-container__sticky-container {
+	position: sticky;
+	top: 0;
+	background-color: cadetblue;
+	height: 100vh;
+}
+
+.inner-container__block-container__content {
+	font-size: 30px;
+	border: 1px solid black;
+	padding: 20px;
+}
