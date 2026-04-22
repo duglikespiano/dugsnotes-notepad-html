@@ -1,0 +1,34 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+.grid {
+	position: relative;
+	display: grid;
+	height: 100vh;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+}
+
+.grid__cell {
+	border: 3px solid black;
+}
+
+.grid__marker {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+	background-color: skyblue;
+	cursor: pointer;
+}
+
+.active {
+	background-color: pink;
+}
