@@ -63,3 +63,12 @@
 29. lazy loading
 30. slider in modal
 31. google maps
+32. day counter
+33. zigzag sticky grid
+34. appear on drag
+35. progress bar
+36. mux
+37. limit area
+38. detect collision
+39. detect closest collision
+40. neon light text
