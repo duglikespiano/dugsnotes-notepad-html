@@ -1,0 +1,62 @@
+/* code reference : https://youtu.be/_13a3r6MYeM?si=D4J2TdEwUQwaeBg5 */
+
+body {
+	display: flex;
+	min-height: 100vh;
+	box-sizing: border-box;
+	justify-content: center;
+	align-items: center;
+	background-color: #07252d;
+	padding: 0;
+	margin: 0;
+}
+
+section {
+	width: 100%;
+}
+
+h2 {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	font-size: 10rem;
+	letter-spacing: 15px;
+	color: #0e3742;
+	/* This property is nonstandard.  */
+	-webkit-box-reflect: below 1px linear-gradient(transparent, #0004);
+	line-height: 0.7em;
+	outline: none;
+	animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+	0%,
+	18%,
+	20%,
+	51%,
+	60%,
+	66%,
+	80%,
+	91%,
+	92% {
+		color: #0e3742;
+		text-shadow: none;
+	}
+	19%,
+	21%,
+	30%,
+	50%,
+	61%,
+	65%,
+	81%,
+	92%,
+	100% {
+		color: #fff;
+		text-shadow:
+			0 0 10px #03bcf4,
+			0 0 20px #03bcf4,
+			0 0 40px #03bcf4,
+			0 0 80px #03bcf4,
+			0 0 160px #03bcf4;
+	}
+}
