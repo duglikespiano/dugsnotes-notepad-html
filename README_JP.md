@@ -74,3 +74,5 @@
 40. neon light text
 41. glowing text
 42. masked text
+43. toggle button
+44. focus text
