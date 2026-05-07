@@ -73,3 +73,4 @@
 39. detect closest collision
 40. neon light text
 41. glowing text
+42. masked text
