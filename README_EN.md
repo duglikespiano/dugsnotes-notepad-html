@@ -76,3 +76,4 @@
 42. masked text
 43. toggle button
 44. focus text
+45. texts typing effect
