@@ -1,0 +1,50 @@
+/* https://youtu.be/ttHgX40UgUU?si=kSR44Ei-_TShdSRg */
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+section {
+	display: flex;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-color: #001300;
+	animation: animateColor 5s linear infinite;
+}
+
+.container {
+	position: relative;
+	display: flex;
+	width: 480px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.container .dot {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background-color: pink;
+	/* transform: scale(0.1); */
+	opacity: 0.2;
+	box-shadow:
+		0 0 10px pink,
+		0 0 20px pink,
+		0 0 40px pink,
+		0 0 60px pink,
+		0 0 80px pink,
+		0 0 100px pink;
+}
+
+@keyframes animateColor {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+	100% {
+		filter: hue-rotate(360deg);
+	}
+}

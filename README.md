@@ -77,3 +77,4 @@
 43. toggle button
 44. focus text
 45. texts typing effect
+46. glowing dots
