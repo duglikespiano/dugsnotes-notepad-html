@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<section>
+			<div id="wrapper">
+				<div id="content-in-wrapper"></div>
+			</div>
+			<div id="content-out-of-wrapper"></div>
+			<p>CHECK CONSOLE ON BROWSER</p>
+		</section>
+	</body>
+	<script>
+		const wrapper = document.querySelector('#wrapper');
+		const contentInWrapper = document.querySelector('#content-in-wrapper');
+		const contentOutOfWrapper = document.querySelector('#content-out-of-wrapper');
+		console.log(wrapper.contains(contentInWrapper));
+		console.log(wrapper.contains(contentOutOfWrapper));
+	</script>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		p {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 5rem;
+		}
+	</style>
+</html>
