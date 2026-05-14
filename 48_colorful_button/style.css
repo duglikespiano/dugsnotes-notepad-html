@@ -1,0 +1,62 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+/* https://scrimba.com/css-challenges-c02p/~04/s05ufdrd33/head */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+	--font-family: 'Karla', sans-serif;
+	--body-bg: #1e1f25;
+	--btn-bg: #000;
+	--btn-color: #cbcbcb;
+	--btn-color-hover: #fff;
+	--grad-color1: #eeaf61;
+	--grad-color2: #fb9062;
+	--grad-color3: #ee5d6c;
+	--grad-color4: #ce4993;
+	--grad-color5: #6a0d83;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: var(--body-bg);
+	font-family: var(--font-family);
+}
+
+.container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-border {
+	background: linear-gradient(115deg, #eeaf61, #fb9062, #ee5d6c, #ce4993, #6a0d83);
+	padding: 2px;
+	transition: all 0.5s;
+}
+
+.button {
+	border: none;
+	background-color: var(--btn-bg);
+	color: var(--btn-color);
+	letter-spacing: 0.1em;
+	font-family: inherit;
+	padding: 1em 1.5em;
+	cursor: pointer;
+	/* border-image: linear-gradient(115deg, #eeaf61, #fb9062, #ee5d6c, #ce4993, #6a0d83); */
+	/* border-image-slice: 1;  */
+	/* border:none <- needs to be commented out*/
+}
+
+.button-border:hover {
+	background: linear-gradient(115deg, #eeaf61, #6a0d83, #fb9062, #ee5d6c, #ce4993);
+}
+
+.button-border:hover .button {
+	color: var(--btn-color-hover);
+	padding: 1.1em 1.6em;
+}
