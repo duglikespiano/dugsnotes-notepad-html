@@ -1,0 +1,18 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+p {
+	background: linear-gradient(90deg, #ffab0f 5%, #ff712b 40.5%, #ff0f7b 85.5%);
+	background-clip: text;
+	color: transparent;
+	font-size: 10rem;
+}

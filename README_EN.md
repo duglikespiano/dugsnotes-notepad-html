@@ -79,3 +79,5 @@
 45. texts typing effect
 46. glowing dots
 47. contains
+48. colorful button
+49. gradient text
