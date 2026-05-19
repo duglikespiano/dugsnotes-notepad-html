@@ -81,3 +81,6 @@
 47. contains
 48. colorful button
 49. gradient text
+50. expanding search bar
+51. loading animation
+52. archery target

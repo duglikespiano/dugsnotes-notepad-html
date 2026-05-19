@@ -1,0 +1,47 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+
+:root {
+	--black: #282828;
+	--blue: #2892f2;
+	--red: #fb2f27;
+	--yellow: #fdfe29;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.rings,
+.ring {
+	display: flex;
+	height: 100vh;
+	border-radius: 50%;
+	justify-content: center;
+	align-items: center;
+}
+
+.ring-1 {
+	width: 200px;
+	height: 200px;
+	background-color: var(--black);
+}
+
+.ring-2 {
+	width: 150px;
+	height: 150px;
+	background-color: var(--blue);
+}
+
+.ring-3 {
+	width: 100px;
+	height: 100px;
+	background-color: var(--red);
+}
+
+.bullseye {
+	width: 50px;
+	height: 50px;
+	background-color: var(--yellow);
+}
