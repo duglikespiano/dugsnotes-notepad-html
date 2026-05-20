@@ -84,3 +84,4 @@
 50. expanding search bar
 51. loading animation
 52. archery target
+53. word carousel

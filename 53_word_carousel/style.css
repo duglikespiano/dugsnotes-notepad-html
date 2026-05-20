@@ -1,0 +1,47 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+
+:root {
+	--bg-word: #5134ff;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	font-family: sans-serif;
+}
+
+h1::after {
+	content: '';
+	background-color: var(--bg-word);
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 0.25em;
+	animation: 6s swap-words infinite;
+}
+
+@keyframes swap-words {
+	0% {
+		content: 'Javascript';
+	}
+	25% {
+		content: 'HTML';
+	}
+	50% {
+		content: 'CSS';
+	}
+	75% {
+		content: 'VSCode';
+	}
+	100% {
+		content: 'Javascript';
+	}
+}
