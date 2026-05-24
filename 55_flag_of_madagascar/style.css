@@ -1,0 +1,48 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+
+:root {
+	--white: #ffffff;
+	--red: #fc3e32;
+	--green: #007e39;
+	--flag-height: 500px;
+	--aspect-ratio: 3 / 2;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-color: #000;
+}
+
+.flag-madagascar {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: repeat(2, 1fr);
+	aspect-ratio: var(--aspect-ratio);
+	height: var(--flag-height);
+}
+
+.white {
+	background-color: var(--white);
+	grid-column: 1;
+	grid-row: 1 / 3;
+}
+.red {
+	background-color: var(--red);
+	grid-column: 2;
+	grid-row: 1;
+}
+.green {
+	background-color: var(--green);
+	grid-column: 2;
+	grid-row: 2;
+}
