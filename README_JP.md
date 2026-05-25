@@ -87,3 +87,4 @@
 53. word carousel
 54. flag of france
 55. flag of germany
+56. flag of switzerland
