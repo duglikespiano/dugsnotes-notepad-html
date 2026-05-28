@@ -90,3 +90,4 @@
 56. flag of switzerland
 57. flag of japan
 58. flag of sweden
+59. flag of niger

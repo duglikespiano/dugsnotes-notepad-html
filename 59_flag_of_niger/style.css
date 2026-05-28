@@ -1,0 +1,56 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+
+:root {
+	--orange: #e15307;
+	--white: #ffffff;
+	--green: #10af2a;
+	--flag-width: 500px;
+	--flag-ratio: 7 / 6;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-color: #000;
+	justify-content: center;
+	align-items: center;
+}
+
+.flag-niger {
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	width: var(--flag-width);
+	background-color: var(--blue);
+	aspect-ratio: var(--flag-ratio);
+}
+
+.orange {
+	background-color: var(--orange);
+}
+
+.white {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--white);
+}
+
+.green {
+	background-color: var(--green);
+}
+
+.circle {
+	height: 85%;
+	left: 50%;
+	top: 50%;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	background-color: var(--orange);
+}
