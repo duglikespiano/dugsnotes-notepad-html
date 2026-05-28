@@ -1,0 +1,45 @@
+/* https://youtu.be/TzuWIHGFKCQ?si=9fP-RcxfSD97_01F */
+
+:root {
+	--blue: #0269a6;
+	--yellow: #fecc00;
+	--flag-width: 500px;
+	--flag-ratio: 8 / 5;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.flag-sweden {
+	display: grid;
+	grid-template-columns: repeat(16, 1fr);
+	grid-template-rows: repeat(10, 1fr);
+	width: var(--flag-width);
+	background-color: var(--blue);
+	aspect-ratio: var(--flag-ratio);
+}
+
+.stripe {
+	background-color: var(--yellow);
+}
+
+.vertical {
+	grid-column: 6 / 8;
+	grid-row: 1 / -1;
+}
+
+.horizontal {
+	grid-column: 1 / -1;
+	grid-row: 5 / 7;
+}
