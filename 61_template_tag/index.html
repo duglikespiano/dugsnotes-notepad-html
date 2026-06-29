@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>HTML Template Example</title>
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 1.5rem 0;
+				font-family: Arial, sans-serif;
+			}
+
+			caption {
+				font-size: 1.4rem;
+				font-weight: bold;
+				margin-bottom: 0.75rem;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 12px;
+				text-align: left;
+				vertical-align: top;
+			}
+
+			th {
+				background: #f5f5f5;
+			}
+
+			tr:nth-child(even) {
+				background: #fafafa;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 4px;
+				border-radius: 4px;
+				font-family: Consolas, monospace;
+			}
+		</style>
+
+		<table>
+			<caption>
+				&lt;template&gt; vs. Hidden Elements
+			</caption>
+
+			<thead>
+				<tr>
+					<th>Feature</th>
+					<th>&lt;template&gt;</th>
+					<th>Hidden &lt;div&gt; (<code>display: none</code>)</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>Visible on page</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>Part of rendered layout</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>Parsed into active DOM</td>
+					<td>Stored separately as <code>template.content</code></td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Event listeners on child elements</td>
+					<td>Not active until cloned</td>
+					<td>Can be attached immediately</td>
+				</tr>
+
+				<tr>
+					<td>Intended as reusable blueprint</td>
+					<td>✅ Yes</td>
+					<td>❌ Not really</td>
+				</tr>
+
+				<tr>
+					<td>Can be cloned repeatedly</td>
+					<td>✅ Yes</td>
+					<td>You'd need to clone the hidden element manually.</td>
+				</tr>
+			</tbody>
+		</table>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				max-width: 700px;
+				margin: 40px auto;
+				line-height: 1.6;
+			}
+
+			button {
+				padding: 10px 20px;
+				cursor: pointer;
+				margin-bottom: 20px;
+			}
+
+			#users {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+			}
+
+			.card {
+				border: 1px solid #ccc;
+				border-radius: 8px;
+				padding: 16px;
+				background: #f7f7f7;
+			}
+
+			.card h2 {
+				margin: 0 0 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>&lt;template&gt; Demonstration</h1>
+
+		<p>Click the button to create user cards. The cards come from the template below.</p>
+
+		<button id="addUser">Add User</button>
+
+		<div id="users"></div>
+
+		<!--
+    Everything inside <template> is NOT rendered.
+
+    The browser parses it,
+    but it doesn't become part of the visible page
+    until JavaScript clones it.
+-->
+		<template id="userTemplate">
+			<div class="card">
+				<h2 class="name">Placeholder Name</h2>
+
+				<p class="job">Placeholder Job</p>
+			</div>
+		</template>
+
+		<script>
+			const users = [
+				{
+					name: 'Alice',
+					job: 'Frontend Developer',
+				},
+				{
+					name: 'Bob',
+					job: 'Backend Developer',
+				},
+				{
+					name: 'Charlie',
+					job: 'UI Designer',
+				},
+			];
+
+			const template = document.getElementById('userTemplate');
+			const container = document.getElementById('users');
+			const button = document.getElementById('addUser');
+
+			let index = 0;
+
+			button.addEventListener('click', () => {
+				if (index >= users.length) {
+					alert('No more users.');
+					return;
+				}
+
+				// Clone the template.
+				//
+				// template.content is a DocumentFragment.
+				//
+				// cloneNode(true)
+				// true = deep clone (copy everything)
+				// false = only copy the root node.
+				//
+				const clone = template.content.cloneNode(true);
+
+				// Find elements INSIDE the cloned template.
+				const name = clone.querySelector('.name');
+				const job = clone.querySelector('.job');
+
+				// Fill in the data.
+				name.textContent = users[index].name;
+				job.textContent = users[index].job;
+
+				// Insert the cloned content into the page.
+				container.appendChild(clone);
+
+				index++;
+			});
+		</script>
+	</body>
+</html>
