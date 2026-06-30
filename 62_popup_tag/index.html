@@ -1,0 +1,270 @@
+<!-- https://www.youtube.com/watch?v=55uUK-iJeNM&t=603s -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>HTML Popup vs Dialog</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				max-width: 900px;
+				margin: 40px auto;
+				padding: 20px;
+				line-height: 1.7;
+				background: #fafafa;
+			}
+
+			h1,
+			h2 {
+				margin-top: 2rem;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 25px 0;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 12px;
+				text-align: left;
+			}
+
+			th {
+				background: #ececec;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 5px;
+				border-radius: 4px;
+			}
+
+			button {
+				padding: 10px 16px;
+				cursor: pointer;
+			}
+
+			[popover] {
+				padding: 20px;
+				border: none;
+				border-radius: 8px;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+			}
+
+			dialog {
+				padding: 20px;
+				border: none;
+				border-radius: 8px;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+			}
+
+			dialog::backdrop {
+				background: rgba(0, 0, 0, 0.45);
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>The "popup" HTML Tag</h1>
+
+		<p>
+			There is <strong>no &lt;popup&gt; HTML element</strong> in the HTML specification. Many developers mistakenly call the new
+			<strong>Popover API</strong> a "popup tag", but the actual syntax is the <code>popover</code> attribute.
+		</p>
+
+		<h2>Comparison Table</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Feature</th>
+					<th>Popup (Popover API)</th>
+					<th>&lt;dialog&gt;</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td>Actual HTML tag?</td>
+					<td>❌ No. Uses an attribute (<code>popover</code>).</td>
+					<td>✅ Yes.</td>
+				</tr>
+
+				<tr>
+					<td>HTML Syntax</td>
+					<td><code>&lt;div popover&gt;</code></td>
+					<td><code>&lt;dialog&gt;</code></td>
+				</tr>
+
+				<tr>
+					<td>Primary Purpose</td>
+					<td>Tooltips, menus, small popups</td>
+					<td>Forms, confirmations, modal windows</td>
+				</tr>
+
+				<tr>
+					<td>Modal Support</td>
+					<td>No</td>
+					<td>Yes (<code>showModal()</code>)</td>
+				</tr>
+
+				<tr>
+					<td>Backdrop</td>
+					<td>No</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Blocks page interaction</td>
+					<td>No</td>
+					<td>Yes (when modal)</td>
+				</tr>
+
+				<tr>
+					<td>Keyboard focus management</td>
+					<td>Minimal</td>
+					<td>Automatic</td>
+				</tr>
+
+				<tr>
+					<td>Close with ESC</td>
+					<td>Usually yes</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Best use case</td>
+					<td>Dropdown menus, help bubbles, quick information</td>
+					<td>Login forms, confirmation dialogs, settings windows</td>
+				</tr>
+
+				<tr>
+					<td>Requires JavaScript?</td>
+					<td>No (basic usage)</td>
+					<td>Yes (typically)</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<hr />
+
+		<h2>Example 1 — Popover API ("Popup")</h2>
+
+		<p>Clicking the button automatically opens the popover. No JavaScript is required.</p>
+
+		<button popovertarget="helpPopup">Show Popover</button>
+
+		<div id="helpPopup" popover>
+			<h3>Popover</h3>
+
+			<p>
+				This element uses the
+				<code>popover</code> attribute.
+			</p>
+
+			<p>It is great for:</p>
+
+			<ul>
+				<li>Help text</li>
+				<li>Dropdown menus</li>
+				<li>Tooltips</li>
+				<li>Small notifications</li>
+			</ul>
+
+			<button popovertarget="helpPopup" popovertargetaction="hide">Close</button>
+		</div>
+
+		<hr />
+
+		<h2>Example 2 — Dialog Element</h2>
+
+		<button id="openDialog">Open Dialog</button>
+
+		<dialog id="myDialog">
+			<h3>Dialog Window</h3>
+
+			<p>
+				The <code>&lt;dialog&gt;</code> element is intended for modal windows, forms, confirmations, and other interactions that
+				should temporarily take over the page.
+			</p>
+
+			<form method="dialog">
+				<button>Close</button>
+			</form>
+		</dialog>
+
+		<script>
+			const dialog = document.getElementById('myDialog');
+
+			document.getElementById('openDialog').addEventListener('click', () => {
+				dialog.showModal();
+			});
+		</script>
+
+		<hr />
+
+		<h2>When Should You Use Each?</h2>
+
+		<h3>Use Popover When:</h3>
+
+		<ul>
+			<li>Creating dropdown menus</li>
+			<li>Showing tooltips</li>
+			<li>Displaying contextual help</li>
+			<li>Making lightweight popups</li>
+		</ul>
+
+		<h3>Use Dialog When:</h3>
+
+		<ul>
+			<li>Building login windows</li>
+			<li>Showing confirmation dialogs</li>
+			<li>Creating forms</li>
+			<li>Displaying settings panels</li>
+			<li>Blocking user interaction until a choice is made</li>
+		</ul>
+
+		<hr />
+
+		<h2>Summary</h2>
+
+		<p>
+			<strong>Incorrect:</strong>
+		</p>
+
+		<pre><code>&lt;popup&gt;
+    Hello
+&lt;/popup&gt;
+</code></pre>
+
+		<p>There is no such HTML element.</p>
+
+		<p>
+			<strong>Correct (Popover API):</strong>
+		</p>
+
+		<pre><code>&lt;div popover&gt;
+    Hello
+&lt;/div&gt;
+</code></pre>
+
+		<p>
+			<strong>Correct (Dialog):</strong>
+		</p>
+
+		<pre><code>&lt;dialog&gt;
+    Hello
+&lt;/dialog&gt;
+</code></pre>
+	</body>
+</html>
