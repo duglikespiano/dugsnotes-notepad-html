@@ -1,0 +1,293 @@
+<!-- https://youtu.be/55uUK-iJeNM?t=502&si=8jsSE_XZyz-R1kXa -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>CSS content-visibility: auto</title>
+
+		<style>
+			/* =====================================================
+   General Styles
+===================================================== */
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				background: #f4f6f8;
+				color: #333;
+			}
+
+			header {
+				background: #1565c0;
+				color: white;
+				padding: 40px 20px;
+				text-align: center;
+			}
+
+			main {
+				width: min(1000px, 90%);
+				margin: 40px auto;
+			}
+
+			section {
+				background: white;
+				padding: 30px;
+				margin-bottom: 40px;
+				border-radius: 10px;
+				box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 6px;
+				border-radius: 4px;
+				font-family: Consolas, monospace;
+			}
+
+			pre {
+				background: #272822;
+				color: #f8f8f2;
+				padding: 15px;
+				border-radius: 8px;
+				overflow: auto;
+			}
+
+			/* =====================================================
+   Table
+===================================================== */
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 12px;
+				text-align: left;
+			}
+
+			th {
+				background: #1565c0;
+				color: white;
+			}
+
+			tr:nth-child(even) {
+				background: #f7f7f7;
+			}
+
+			/* =====================================================
+   Demo Cards
+===================================================== */
+
+			.card {
+				margin: 60px 0;
+				padding: 25px;
+
+				background: white;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+
+				/* Performance optimization */
+				content-visibility: auto;
+
+				/* Reserve space while skipped */
+				contain-intrinsic-size: 500px;
+			}
+
+			.placeholder {
+				margin-top: 20px;
+				height: 350px;
+				border-radius: 6px;
+
+				background: repeating-linear-gradient(45deg, #ddd, #ddd 20px, #eee 20px, #eee 40px);
+			}
+
+			footer {
+				text-align: center;
+				margin: 50px 0;
+				color: #666;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>CSS <code>content-visibility: auto</code></h1>
+
+			<p>A CSS performance feature that allows the browser to skip rendering off-screen content until it becomes visible.</p>
+		</header>
+
+		<main>
+			<section>
+				<h2>What is <code>content-visibility: auto</code>?</h2>
+
+				<p>
+					<b>content-visibility</b> is a <b>CSS property</b>, not an HTML tag. It tells the browser whether an element's contents
+					should be rendered.
+				</p>
+
+				<p>
+					When using
+					<code>content-visibility: auto;</code>, the browser skips layout and painting for elements that are outside the
+					viewport, improving performance on long pages.
+				</p>
+
+				<pre>
+.card{
+    content-visibility:auto;
+    contain-intrinsic-size:500px;
+}</pre
+				>
+			</section>
+
+			<section>
+				<h2>Why use <code>contain-intrinsic-size</code>?</h2>
+
+				<p>When the browser skips rendering an element, it doesn't know its actual height yet.</p>
+
+				<p>
+					The
+					<code>contain-intrinsic-size</code>
+					property reserves placeholder space until the element is rendered, preventing layout shifts while scrolling.
+				</p>
+			</section>
+
+			<section>
+				<h2>Comparison: <code>content-visibility: auto</code> vs <code>display: none</code></h2>
+
+				<table>
+					<tr>
+						<th>Feature</th>
+						<th>content-visibility: auto</th>
+						<th>display: none</th>
+					</tr>
+
+					<tr>
+						<td>Element exists in the DOM</td>
+						<td>✅ Yes</td>
+						<td>✅ Yes</td>
+					</tr>
+
+					<tr>
+						<td>Participates in page layout</td>
+						<td>✅ Yes</td>
+						<td>❌ No</td>
+					</tr>
+
+					<tr>
+						<td>Occupies space on the page</td>
+						<td>✅ Yes</td>
+						<td>❌ No</td>
+					</tr>
+
+					<tr>
+						<td>Browser may skip rendering</td>
+						<td>✅ Yes (when off-screen)</td>
+						<td>✅ Yes (always hidden)</td>
+					</tr>
+
+					<tr>
+						<td>Automatically becomes visible while scrolling</td>
+						<td>✅ Yes</td>
+						<td>❌ No</td>
+					</tr>
+
+					<tr>
+						<td>Receives pointer events</td>
+						<td>Only when rendered</td>
+						<td>❌ No</td>
+					</tr>
+
+					<tr>
+						<td>Accessible to JavaScript</td>
+						<td>✅ Yes</td>
+						<td>✅ Yes</td>
+					</tr>
+
+					<tr>
+						<td>Best use case</td>
+						<td>Performance optimization for long pages</td>
+						<td>Hide elements completely</td>
+					</tr>
+
+					<tr>
+						<td>Typical use</td>
+						<td>Blogs, feeds, documentation, galleries</td>
+						<td>Menus, dialogs, conditional UI</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h2>Live Example</h2>
+
+				<p>
+					Scroll down the page. Only the visible cards are rendered immediately. The browser renders the others as they approach
+					the viewport.
+				</p>
+
+				<div class="card">
+					<h3>Card 1</h3>
+					<p>This card is rendered immediately because it is visible.</p>
+					<div class="placeholder"></div>
+				</div>
+
+				<div class="card">
+					<h3>Card 2</h3>
+					<p>This card is initially skipped if it starts below the viewport.</p>
+					<div class="placeholder"></div>
+				</div>
+
+				<div class="card">
+					<h3>Card 3</h3>
+					<p>The browser renders this only when you scroll near it.</p>
+					<div class="placeholder"></div>
+				</div>
+
+				<div class="card">
+					<h3>Card 4</h3>
+					<p>This demonstrates how large pages can become much more efficient.</p>
+					<div class="placeholder"></div>
+				</div>
+
+				<div class="card">
+					<h3>Card 5</h3>
+					<p>Imagine hundreds of these sections on a documentation website.</p>
+					<div class="placeholder"></div>
+				</div>
+			</section>
+
+			<section>
+				<h2>When should I use it?</h2>
+
+				<ul>
+					<li>✅ Long blog posts</li>
+					<li>✅ Documentation websites</li>
+					<li>✅ Product catalogs</li>
+					<li>✅ Photo galleries</li>
+					<li>✅ Infinite scrolling feeds</li>
+					<li>✅ Chat history</li>
+					<li>✅ Large dashboards</li>
+				</ul>
+
+				<p>Avoid using it for above-the-fold content or small interface elements that should always be immediately available.</p>
+			</section>
+		</main>
+
+		<footer>CSS Performance Demo — content-visibility: auto</footer>
+	</body>
+</html>
