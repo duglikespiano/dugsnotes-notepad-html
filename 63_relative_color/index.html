@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS Relative Colors</title>
+
+		<style>
+			/* ==========================================================
+   General Page Styling
+========================================================== */
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				margin: 40px;
+				background: #f6f7fb;
+				color: #222;
+			}
+
+			section {
+				background: white;
+				border-radius: 12px;
+				padding: 24px;
+				margin-bottom: 40px;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+			}
+
+			pre {
+				background: #222;
+				color: #fff;
+				padding: 16px;
+				overflow-x: auto;
+				border-radius: 8px;
+			}
+
+			code {
+				font-family: Consolas, monospace;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #efefef;
+			}
+
+			.demo {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px;
+				margin-top: 20px;
+			}
+
+			.box {
+				width: 170px;
+				height: 120px;
+				border-radius: 10px;
+				color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-weight: bold;
+			}
+
+			/* ==========================================================
+   Relative Color Examples
+========================================================== */
+
+			/*
+Base color.
+
+We'll derive multiple colors from this single color.
+*/
+
+			:root {
+				--brand: royalblue;
+			}
+
+			/* Original */
+			.original {
+				background: var(--brand);
+			}
+
+			/*
+Increase lightness by 20%.
+
+Syntax:
+hsl(from <color> h s l)
+
+The variables h, s and l represent the
+Hue, Saturation and Lightness of the source color.
+*/
+
+			.lighter {
+				background: hsl(from var(--brand) h s calc(l + 20));
+			}
+
+			/* Decrease lightness */
+
+			.darker {
+				background: hsl(from var(--brand) h s calc(l - 20));
+			}
+
+			/* Reduce saturation */
+
+			.less-saturated {
+				background: hsl(from var(--brand) h calc(s - 40) l);
+			}
+
+			/* Rotate hue */
+
+			.rotated {
+				background: hsl(from var(--brand) calc(h + 120) s l);
+			}
+
+			/*
+RGBA example.
+
+rgb(from ...)
+
+r g b alpha become available.
+*/
+
+			.transparent {
+				background: rgb(from var(--brand) r g b / 40%);
+				color: black;
+				border: 2px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS Relative Colors</h1>
+
+		<section>
+			<h2>What is a Relative Color?</h2>
+
+			<p>
+				A <strong>relative color</strong> lets you create a new color by starting from an existing color instead of writing every
+				RGB or HSL value yourself.
+			</p>
+
+			<p>Rather than saying:</p>
+
+			<pre><code>background: hsl(220 70% 60%);</code></pre>
+
+			<p>you can say:</p>
+
+			<pre><code>background: hsl(from royalblue h s calc(l + 20));</code></pre>
+
+			<p>This means:</p>
+
+			<ul>
+				<li>Take the color <strong>royalblue</strong>.</li>
+				<li>Extract its HSL values.</li>
+				<li>Increase the lightness.</li>
+				<li>Create a new color.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>General Syntax</h2>
+
+			<pre><code>hsl(
+    from &lt;color&gt;
+    h
+    s
+    l
+)
+
+rgb(
+    from &lt;color&gt;
+    r
+    g
+    b
+)
+
+lab(from ...)
+lch(from ...)
+oklab(from ...)
+oklch(from ...)
+color(from ...)</code></pre>
+
+			<p>The <code>from</code> keyword tells CSS:</p>
+
+			<blockquote>Take an existing color and expose its individual channels.</blockquote>
+		</section>
+
+		<section>
+			<h2>Live Examples</h2>
+
+			<div class="demo">
+				<div class="box original">Original</div>
+
+				<div class="box lighter">Lighter</div>
+
+				<div class="box darker">Darker</div>
+
+				<div class="box less-saturated">Less Saturated</div>
+
+				<div class="box rotated">Hue +120°</div>
+
+				<div class="box transparent">40% Alpha</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>How It Works</h2>
+
+			<p>Suppose our base color is:</p>
+
+			<pre><code>:root {
+    --brand: royalblue;
+}</code></pre>
+
+			<p>Then:</p>
+
+			<pre><code>background:
+    hsl(
+        from var(--brand)
+        h
+        s
+        calc(l + 20)
+    );</code></pre>
+
+			<p>means:</p>
+
+			<ol>
+				<li>Read <code>--brand</code>.</li>
+				<li>Convert it into HSL.</li>
+				<li>Keep Hue unchanged.</li>
+				<li>Keep Saturation unchanged.</li>
+				<li>Add 20 to Lightness.</li>
+				<li>Create a new color.</li>
+			</ol>
+		</section>
+
+		<section>
+			<h2>Available Variables</h2>
+
+			<table>
+				<tr>
+					<th>Color Function</th>
+					<th>Available Variables</th>
+				</tr>
+
+				<tr>
+					<td>rgb(from ...)</td>
+					<td>r, g, b, alpha</td>
+				</tr>
+
+				<tr>
+					<td>hsl(from ...)</td>
+					<td>h, s, l, alpha</td>
+				</tr>
+
+				<tr>
+					<td>lab(from ...)</td>
+					<td>l, a, b, alpha</td>
+				</tr>
+
+				<tr>
+					<td>lch(from ...)</td>
+					<td>l, c, h, alpha</td>
+				</tr>
+
+				<tr>
+					<td>oklab(from ...)</td>
+					<td>l, a, b, alpha</td>
+				</tr>
+
+				<tr>
+					<td>oklch(from ...)</td>
+					<td>l, c, h, alpha</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Why Use Relative Colors?</h2>
+
+			<table>
+				<tr>
+					<th>Without Relative Colors</th>
+					<th>With Relative Colors</th>
+				</tr>
+
+				<tr>
+					<td>Need to manually calculate new RGB/HSL values.</td>
+					<td>Reuse an existing color.</td>
+				</tr>
+
+				<tr>
+					<td>Hard to maintain theme colors.</td>
+					<td>Theme updates automatically.</td>
+				</tr>
+
+				<tr>
+					<td>Duplicate many color values.</td>
+					<td>Only modify the channels you want.</td>
+				</tr>
+
+				<tr>
+					<td>Difficult to make lighter/darker variants.</td>
+					<td>Use simple math with <code>calc()</code>.</td>
+				</tr>
+
+				<tr>
+					<td>Easy to introduce inconsistent colors.</td>
+					<td>Derived colors stay visually related.</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Typical Use Cases</h2>
+
+			<ul>
+				<li>Create hover colors from the original button color.</li>
+
+				<li>Create disabled versions by lowering saturation.</li>
+
+				<li>Create dark mode colors automatically.</li>
+
+				<li>Generate borders slightly darker than backgrounds.</li>
+
+				<li>Create shadows with lower alpha.</li>
+
+				<li>Generate an entire color palette from one brand color.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<p>
+				Relative colors are part of the CSS Color Module Level 5 specification. Modern versions of Chrome, Edge, Safari, and
+				Firefox have support, though some features may require up-to-date browser versions. If you need to support older browsers,
+				consider providing a fallback color before the relative color declaration:
+			</p>
+
+			<pre><code>.button {
+    /* Fallback */
+    background: royalblue;
+
+    /* Modern browsers */
+    background:
+        hsl(from royalblue h s calc(l + 15));
+}</code></pre>
+		</section>
+	</body>
+</html>
