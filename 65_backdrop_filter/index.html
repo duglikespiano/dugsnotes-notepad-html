@@ -1,0 +1,394 @@
+<!-- https://youtu.be/55uUK-iJeNM?t=1083&si=xipT71p4Qil0zYDP -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>CSS backdrop-filter Explained</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				color: white;
+
+				/* Colorful background so the effect is visible */
+				background:
+					radial-gradient(circle at top left, #ff6b6b, transparent 35%),
+					radial-gradient(circle at top right, #4ecdc4, transparent 35%),
+					radial-gradient(circle at bottom left, #ffe66d, transparent 35%),
+					radial-gradient(circle at bottom right, #6c63ff, transparent 35%), linear-gradient(135deg, #111, #333);
+
+				min-height: 100vh;
+			}
+
+			/* Decorative circles */
+			.background-shape {
+				position: fixed;
+				border-radius: 50%;
+				filter: blur(40px);
+				opacity: 0.7;
+			}
+
+			.shape1 {
+				width: 300px;
+				height: 300px;
+				background: hotpink;
+				top: 40px;
+				left: 50px;
+			}
+
+			.shape2 {
+				width: 250px;
+				height: 250px;
+				background: cyan;
+				bottom: 80px;
+				right: 80px;
+			}
+
+			.container {
+				width: min(1100px, 90%);
+				margin: 50px auto;
+			}
+
+			h1 {
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			section {
+				margin: 50px 0;
+			}
+
+			.card-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+				gap: 25px;
+			}
+
+			.card {
+				padding: 25px;
+				border-radius: 18px;
+
+				/* Semi-transparent background is required */
+				background: rgba(255, 255, 255, 0.15);
+
+				/* The magic */
+				backdrop-filter: blur(10px);
+
+				/* Safari */
+				-webkit-backdrop-filter: blur(10px);
+
+				border: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
+			.blur {
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+			}
+
+			.brightness {
+				backdrop-filter: brightness(180%);
+				-webkit-backdrop-filter: brightness(180%);
+			}
+
+			.grayscale {
+				backdrop-filter: grayscale(100%);
+				-webkit-backdrop-filter: grayscale(100%);
+			}
+
+			.contrast {
+				backdrop-filter: contrast(200%);
+				-webkit-backdrop-filter: contrast(200%);
+			}
+
+			.multiple {
+				backdrop-filter: blur(10px) saturate(180%) brightness(120%);
+				-webkit-backdrop-filter: blur(10px) saturate(180%) brightness(120%);
+			}
+
+			.demo-area {
+				position: relative;
+				padding: 60px;
+				border-radius: 20px;
+				overflow: hidden;
+				margin-top: 25px;
+			}
+
+			.demo-area::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+				background-size: 300% 300%;
+				animation: move 8s linear infinite;
+			}
+
+			.overlay {
+				position: relative;
+				width: 320px;
+				margin: auto;
+				padding: 25px;
+				border-radius: 20px;
+				background: rgba(255, 255, 255, 0.2);
+				backdrop-filter: blur(18px);
+				-webkit-backdrop-filter: blur(18px);
+				border: 1px solid rgba(255, 255, 255, 0.35);
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				padding: 12px;
+			}
+
+			th {
+				background: rgba(255, 255, 255, 0.15);
+			}
+
+			code {
+				background: rgba(255, 255, 255, 0.15);
+				padding: 2px 6px;
+				border-radius: 5px;
+			}
+
+			@keyframes move {
+				from {
+					background-position: 0% 50%;
+				}
+				to {
+					background-position: 100% 50%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="background-shape shape1"></div>
+		<div class="background-shape shape2"></div>
+
+		<div class="container">
+			<h1>CSS <code>backdrop-filter</code></h1>
+
+			<p>
+				The <strong>backdrop-filter</strong> property applies graphical effects to everything <strong>behind an element</strong>,
+				rather than the element itself. It's commonly used to create the modern "glassmorphism" effect.
+			</p>
+
+			<section>
+				<h2>Basic Syntax</h2>
+
+				<pre><code>.glass {
+    background: rgba(255,255,255,.2);
+    backdrop-filter: blur(10px);
+}</code></pre>
+
+				<p>
+					Notice that the background is semi-transparent. If the element has a fully opaque background, you won't see the filtered
+					backdrop.
+				</p>
+			</section>
+
+			<section>
+				<h2>Different Filter Effects</h2>
+
+				<div class="card-grid">
+					<div class="card blur">
+						<h3>Blur</h3>
+						<p>blur(12px)</p>
+					</div>
+
+					<div class="card brightness">
+						<h3>Brightness</h3>
+						<p>brightness(180%)</p>
+					</div>
+
+					<div class="card grayscale">
+						<h3>Grayscale</h3>
+						<p>grayscale(100%)</p>
+					</div>
+
+					<div class="card contrast">
+						<h3>Contrast</h3>
+						<p>contrast(200%)</p>
+					</div>
+
+					<div class="card multiple">
+						<h3>Combined</h3>
+						<p>blur + saturate + brightness</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Real World Example - Glass Card</h2>
+
+				<div class="demo-area">
+					<div class="overlay">
+						<h2>Login</h2>
+
+						<p>This card blurs the colorful background behind it, creating a frosted glass appearance.</p>
+
+						<button style="padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer">Login</button>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Common Filter Functions</h2>
+
+				<table>
+					<tr>
+						<th>Function</th>
+						<th>Description</th>
+						<th>Example</th>
+					</tr>
+
+					<tr>
+						<td>blur()</td>
+						<td>Blurs the background.</td>
+						<td>blur(10px)</td>
+					</tr>
+
+					<tr>
+						<td>brightness()</td>
+						<td>Makes the backdrop brighter or darker.</td>
+						<td>brightness(150%)</td>
+					</tr>
+
+					<tr>
+						<td>contrast()</td>
+						<td>Adjusts contrast.</td>
+						<td>contrast(200%)</td>
+					</tr>
+
+					<tr>
+						<td>grayscale()</td>
+						<td>Converts backdrop to grayscale.</td>
+						<td>grayscale(100%)</td>
+					</tr>
+
+					<tr>
+						<td>invert()</td>
+						<td>Inverts backdrop colors.</td>
+						<td>invert(100%)</td>
+					</tr>
+
+					<tr>
+						<td>opacity()</td>
+						<td>Adjusts backdrop opacity.</td>
+						<td>opacity(50%)</td>
+					</tr>
+
+					<tr>
+						<td>saturate()</td>
+						<td>Makes colors more or less vivid.</td>
+						<td>saturate(200%)</td>
+					</tr>
+
+					<tr>
+						<td>sepia()</td>
+						<td>Applies a sepia effect.</td>
+						<td>sepia(100%)</td>
+					</tr>
+
+					<tr>
+						<td>hue-rotate()</td>
+						<td>Rotates the color wheel.</td>
+						<td>hue-rotate(90deg)</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h2>How It Works</h2>
+
+				<p>
+					Unlike the normal <code>filter</code> property, which affects the element itself, <code>backdrop-filter</code> affects
+					whatever is visible behind the element.
+				</p>
+
+				<pre><code>/* Filters the element */
+filter: blur(10px);
+
+/* Filters the background behind the element */
+backdrop-filter: blur(10px);</code></pre>
+			</section>
+
+			<section>
+				<h2>Requirements</h2>
+
+				<ul>
+					<li>✔ The element should have a transparent or semi-transparent background.</li>
+					<li>✔ There must be visible content behind the element.</li>
+					<li>✔ Usually paired with <code>background: rgba(...)</code>.</li>
+					<li>✔ Safari often requires <code>-webkit-backdrop-filter</code>.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Performance Notes</h2>
+
+				<ul>
+					<li>Backdrop filtering is more expensive than normal CSS backgrounds.</li>
+					<li>Avoid applying it to many large elements.</li>
+					<li>Blur is the most commonly used effect.</li>
+					<li>Keep blur values reasonable (typically 5–20px).</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2><code>filter</code> vs <code>backdrop-filter</code></h2>
+
+				<table>
+					<tr>
+						<th>Feature</th>
+						<th>filter</th>
+						<th>backdrop-filter</th>
+					</tr>
+
+					<tr>
+						<td>Applies to</td>
+						<td>The element itself</td>
+						<td>The background behind the element</td>
+					</tr>
+
+					<tr>
+						<td>Affects text inside</td>
+						<td>Yes</td>
+						<td>No</td>
+					</tr>
+
+					<tr>
+						<td>Requires transparency</td>
+						<td>No</td>
+						<td>Yes</td>
+					</tr>
+
+					<tr>
+						<td>Common use</td>
+						<td>Image effects</td>
+						<td>Glassmorphism UI</td>
+					</tr>
+
+					<tr>
+						<td>Performance</td>
+						<td>Usually cheaper</td>
+						<td>Usually more expensive</td>
+					</tr>
+				</table>
+			</section>
+		</div>
+	</body>
+</html>
