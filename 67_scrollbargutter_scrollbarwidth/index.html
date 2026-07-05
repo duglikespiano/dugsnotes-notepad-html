@@ -1,0 +1,491 @@
+<!-- https://youtu.be/55uUK-iJeNM?t=1192&si=AjDlnRtCTFMHFjzT -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS scrollbar-gutter & scrollbar-width Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				background: #f5f7fa;
+				color: #222;
+			}
+
+			header {
+				background: #2c3e50;
+				color: white;
+				padding: 40px 20px;
+			}
+
+			main {
+				max-width: 1100px;
+				margin: auto;
+				padding: 40px 20px;
+			}
+
+			section {
+				background: white;
+				margin-bottom: 35px;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+			}
+
+			h1,
+			h2,
+			h3 {
+				margin-top: 0;
+			}
+
+			code {
+				padding: 2px 6px;
+				border-radius: 4px;
+			}
+
+			pre {
+				background: #272822;
+				color: #f8f8f2;
+				padding: 20px;
+				overflow: auto;
+				border-radius: 8px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 12px;
+				text-align: left;
+			}
+
+			th {
+				background: #34495e;
+				color: white;
+			}
+
+			.notice {
+				background: #fff7cc;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			.warning {
+				background: #ffe7e7;
+				border-left: 5px solid #e74c3c;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			.tip {
+				background: #eaf7ff;
+				border-left: 5px solid #3498db;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			.demo-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 30px;
+				margin-top: 20px;
+			}
+
+			.box {
+				flex: 1;
+				min-width: 320px;
+			}
+
+			.scrollbox {
+				border: 2px solid #3498db;
+				height: 220px;
+				overflow: auto;
+				padding: 15px;
+				background: white;
+			}
+
+			.no-gutter {
+				scrollbar-gutter: auto;
+			}
+
+			.with-gutter {
+				scrollbar-gutter: stable;
+			}
+
+			.with-both {
+				scrollbar-gutter: stable both-edges;
+			}
+
+			.thin-scrollbar {
+				scrollbar-width: thin;
+			}
+
+			.none-scrollbar {
+				scrollbar-width: none;
+			}
+
+			.none-scrollbar::-webkit-scrollbar {
+				display: none;
+			}
+
+			.long-content {
+				height: 500px;
+				background:
+					linear-gradient(#3498db, #3498db) top/100% 50px no-repeat,
+					linear-gradient(#eeeeee, #eeeeee);
+			}
+
+			label {
+				display: block;
+				margin-bottom: 10px;
+				font-weight: bold;
+			}
+
+			button {
+				margin-top: 15px;
+				padding: 10px 20px;
+				cursor: pointer;
+			}
+
+			.page-demo {
+				margin-top: 20px;
+				border: 2px solid #aaa;
+				padding: 20px;
+				background: #fafafa;
+			}
+
+			.fake-page {
+				width: 100%;
+				max-width: 700px;
+				margin: auto;
+				background: white;
+				border: 1px solid #ccc;
+				padding: 20px;
+				text-align: center;
+			}
+
+			.fake-page.auto {
+				scrollbar-gutter: auto;
+			}
+
+			.fake-page.stable {
+				scrollbar-gutter: stable;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>CSS scrollbar-gutter & scrollbar-width</h1>
+			<p>A practical guide with examples and browser support notes.</p>
+		</header>
+
+		<main>
+			<section>
+				<h2>What is <code>scrollbar-gutter</code>?</h2>
+
+				<p>
+					Normally, when a scrollbar appears, it consumes part of the content area, which may cause text or centered elements to
+					shift.
+				</p>
+
+				<p>
+					<code>scrollbar-gutter</code> allows browsers to reserve space for the scrollbar before it appears, preventing
+					unexpected layout shifts.
+				</p>
+
+				<pre><code>.container{
+    overflow:auto;
+    scrollbar-gutter:stable;
+}</code></pre>
+
+				<div class="notice">
+					<strong>Browser support</strong><br /><br />
+
+					Modern versions of Chrome, Edge, Firefox, and Safari support
+					<code>scrollbar-gutter</code>. Older browsers simply ignore the property, so your layout continues to function normally.
+				</div>
+			</section>
+
+			<section>
+				<h2>What is <code>scrollbar-width</code>?</h2>
+
+				<p>
+					<code>scrollbar-width</code> controls how thick a scrollbar should be. Unlike <code>scrollbar-gutter</code>, it changes
+					the appearance of the scrollbar rather than reserving layout space.
+				</p>
+
+				<pre><code>.container{
+    scrollbar-width:thin;
+}</code></pre>
+
+				<table>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+
+					<tr>
+						<td><code>auto</code></td>
+						<td>Default scrollbar width.</td>
+					</tr>
+
+					<tr>
+						<td><code>thin</code></td>
+						<td>Uses a thinner scrollbar.</td>
+					</tr>
+
+					<tr>
+						<td><code>none</code></td>
+						<td>Hides the scrollbar while still allowing scrolling.</td>
+					</tr>
+				</table>
+
+				<div class="notice">
+					Modern browsers support <code>scrollbar-width</code>, although it originated in Firefox. Older browsers may ignore the
+					property.
+				</div>
+			</section>
+
+			<section>
+				<h2>Comparison Table</h2>
+
+				<table>
+					<tr>
+						<th>Property</th>
+						<th>Purpose</th>
+						<th>Common Values</th>
+						<th>Affects Layout?</th>
+					</tr>
+
+					<tr>
+						<td><code>scrollbar-gutter</code></td>
+						<td>Reserve space for scrollbars.</td>
+						<td>auto, stable, stable both-edges</td>
+						<td>Yes</td>
+					</tr>
+
+					<tr>
+						<td><code>scrollbar-width</code></td>
+						<td>Control scrollbar thickness.</td>
+						<td>auto, thin, none</td>
+						<td>No</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<h2>Interactive Example: scrollbar-gutter</h2>
+
+				<p>
+					Click the button below to add enough content to make both boxes scroll. Depending on your operating system and browser
+					settings, you may or may not notice a visual difference.
+				</p>
+
+				<div class="demo-container">
+					<div class="box">
+						<label>No gutter</label>
+
+						<div id="box1" class="scrollbox no-gutter">
+							<p>This box starts with very little content.</p>
+						</div>
+					</div>
+
+					<div class="box">
+						<label>scrollbar-gutter: stable</label>
+
+						<div id="box2" class="scrollbox with-gutter">
+							<p>This box starts with very little content.</p>
+						</div>
+					</div>
+				</div>
+
+				<button id="toggleContent">Toggle Large Content</button>
+
+				<div class="warning">
+					<h3>Why these two boxes may look identical</h3>
+
+					<p>If you are using macOS, you may not see any difference at all. This is expected behavior.</p>
+
+					<p>
+						By default, macOS uses <strong>overlay scrollbars</strong>, meaning the scrollbar is painted on top of the content
+						instead of taking up layout space. Since no layout space is consumed, there is nothing for
+						<code>scrollbar-gutter</code> to reserve.
+					</p>
+
+					<p>
+						Even on operating systems that use traditional scrollbars, this example can still appear nearly identical because both
+						boxes have a fixed width. The scrollbar appears inside the scrollable element, so the overall box size does not
+						visibly change.
+					</p>
+
+					<p>On macOS you can test the property more easily by changing the system setting:</p>
+
+					<pre><code>System Settings
+→ Appearance
+→ Show scroll bars
+→ Always</code></pre>
+
+					<p>
+						When scrollbars are always visible, browsers reserve physical space for them instead of overlaying them, making the
+						effect of
+						<code>scrollbar-gutter</code> much easier to observe.
+					</p>
+				</div>
+
+				<div class="tip">
+					<h3>Real-world usage</h3>
+
+					<p>The most common use of <code>scrollbar-gutter</code> is not inside small scrollable elements like these boxes.</p>
+
+					<p>
+						Instead, it is typically applied to the entire page to prevent the page from "jumping" horizontally when a modal
+						dialog opens and page scrolling is disabled.
+					</p>
+
+					<pre><code>html{
+    scrollbar-gutter:stable;
+}</code></pre>
+
+					<p>
+						Without this property, hiding the page scrollbar changes the viewport's available width, causing centered layouts to
+						shift horizontally. With <code>scrollbar-gutter: stable</code>, the scrollbar space is always reserved, so the layout
+						remains perfectly stable.
+					</p>
+
+					<p>
+						This page-layout stabilization is the primary reason
+						<code>scrollbar-gutter</code> was added to CSS.
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<h2>Example: scrollbar-gutter: stable both-edges</h2>
+
+				<p>
+					The <code>both-edges</code> keyword reserves equal space on both sides of the scrolling area. This helps keep centered
+					content visually centered, even when a scrollbar appears.
+				</p>
+
+				<div class="scrollbox with-both">
+					<div class="long-content"></div>
+				</div>
+
+				<pre><code>.container{
+    overflow:auto;
+    scrollbar-gutter:stable both-edges;
+}</code></pre>
+			</section>
+
+			<section>
+				<h2>Example: scrollbar-width</h2>
+
+				<div class="demo-container">
+					<div class="box">
+						<label>Default</label>
+
+						<div class="scrollbox">
+							<div class="long-content"></div>
+						</div>
+					</div>
+
+					<div class="box">
+						<label>Thin</label>
+
+						<div class="scrollbox thin-scrollbar">
+							<div class="long-content"></div>
+						</div>
+					</div>
+
+					<div class="box">
+						<label>Hidden</label>
+
+						<div class="scrollbox none-scrollbar">
+							<div class="long-content"></div>
+						</div>
+					</div>
+				</div>
+
+				<pre><code>.default{
+    scrollbar-width:auto;
+}
+
+.thin{
+    scrollbar-width:thin;
+}
+
+.hidden{
+    scrollbar-width:none;
+}</code></pre>
+			</section>
+
+			<section>
+				<h2>Best Practices</h2>
+
+				<ul>
+					<li>Use <code>scrollbar-gutter</code> to prevent layout shifts.</li>
+
+					<li>Use <code>scrollbar-width</code> only to adjust scrollbar appearance.</li>
+
+					<li>Avoid hiding scrollbars for important content because users may not realize that an area is scrollable.</li>
+
+					<li>
+						Remember that operating systems using overlay scrollbars (such as the default configuration on macOS) may show little
+						or no visible effect from <code>scrollbar-gutter</code>.
+					</li>
+				</ul>
+			</section>
+		</main>
+
+		<script>
+			const button = document.getElementById('toggleContent');
+
+			const box1 = document.getElementById('box1');
+			const box2 = document.getElementById('box2');
+
+			let expanded = false;
+
+			button.addEventListener('click', () => {
+				expanded = !expanded;
+
+				if (expanded) {
+					const html = `
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        `;
+
+					box1.innerHTML = html;
+					box2.innerHTML = html;
+				} else {
+					box1.innerHTML = '<p>This box starts with very little content.</p>';
+					box2.innerHTML = '<p>This box starts with very little content.</p>';
+				}
+			});
+		</script>
+	</body>
+</html>
