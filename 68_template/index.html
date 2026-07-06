@@ -1,0 +1,398 @@
+<!-- https://youtu.be/HgNDii20FG4?t=35&si=G8wN3lSg8booiw-V -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>HTML &lt;template&gt; Element Explained</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 40px;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				background: #f4f6f9;
+				color: #222;
+			}
+
+			section {
+				background: white;
+				padding: 25px;
+				margin-bottom: 35px;
+				border-radius: 10px;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+			}
+
+			code {
+				background: #efefef;
+				padding: 2px 5px;
+				border-radius: 4px;
+			}
+
+			pre {
+				background: #272822;
+				color: #eee;
+				padding: 18px;
+				overflow: auto;
+				border-radius: 8px;
+			}
+
+			button {
+				padding: 10px 20px;
+				font-size: 16px;
+				cursor: pointer;
+				margin: 10px 0;
+			}
+
+			.card {
+				border: 2px solid #4caf50;
+				padding: 15px;
+				margin: 10px 0;
+				border-radius: 8px;
+				background: #f8fff8;
+			}
+
+			.note {
+				background: #fff7d6;
+				border-left: 5px solid orange;
+				padding: 15px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 12px;
+				text-align: left;
+			}
+
+			th {
+				background: #f0f0f0;
+			}
+
+			footer {
+				text-align: center;
+				margin-top: 50px;
+				color: #777;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>HTML &lt;template&gt; Element</h1>
+
+		<p>
+			The <code>&lt;template&gt;</code> element is used to store HTML that should <strong>not be rendered immediately</strong>.
+			Instead, JavaScript can copy (clone) its contents whenever needed.
+		</p>
+
+		<section>
+			<h2>Why use &lt;template&gt;?</h2>
+
+			<p>Normally every HTML element becomes part of the page as soon as the browser parses it.</p>
+
+			<p>Sometimes you want HTML that acts as a blueprint instead of being displayed. For example:</p>
+
+			<ul>
+				<li>Chat messages</li>
+				<li>User profile cards</li>
+				<li>Todo list items</li>
+				<li>Product cards</li>
+				<li>Comment blocks</li>
+				<li>Table rows</li>
+			</ul>
+
+			<p>
+				Instead of writing the same HTML repeatedly with JavaScript, you write it once inside a <code>&lt;template&gt;</code>.
+			</p>
+		</section>
+
+		<section>
+			<h2>How it works</h2>
+
+			<p>
+				Everything inside a template is parsed by the browser, but it is stored inside a special object called
+				<code>template.content</code>.
+			</p>
+
+			<p>Because it is not part of the rendered document:</p>
+
+			<ul>
+				<li>Nothing is displayed.</li>
+				<li>Images are not rendered.</li>
+				<li>Scripts inside it do not execute.</li>
+				<li>CSS does not affect it.</li>
+				<li>Layout space is not reserved.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Simple Template Example</h2>
+
+			<button id="createCard">Create Card</button>
+
+			<div id="cards"></div>
+
+			<template id="cardTemplate">
+				<div class="card">
+					<h3>Template Card</h3>
+					<p>This entire card came from the &lt;template&gt; element.</p>
+				</div>
+			</template>
+
+			<pre>
+const template = document.querySelector("#cardTemplate");
+
+const clone = template.content.cloneNode(true);
+
+document.querySelector("#cards").appendChild(clone);
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Creating Multiple Elements</h2>
+
+			<button id="createUsers">Generate Users</button>
+
+			<div id="users"></div>
+
+			<template id="userTemplate">
+				<div class="card">
+					<h3 class="name"></h3>
+					<p class="job"></p>
+				</div>
+			</template>
+		</section>
+
+		<section>
+			<h2>template.content</h2>
+
+			<p>Notice something important:</p>
+
+			<pre>
+const template = document.querySelector("#userTemplate");
+
+console.log(template.content);
+</pre
+			>
+
+			<p><code>template.content</code> is a <code>DocumentFragment</code>. It contains all of the HTML inside the template.</p>
+
+			<p>You clone this fragment whenever you need a new copy.</p>
+		</section>
+
+		<section>
+			<h2>cloneNode(true)</h2>
+
+			<p>Usually you clone the template like this:</p>
+
+			<pre>
+const clone = template.content.cloneNode(true);
+</pre
+			>
+
+			<p>The <code>true</code> means:</p>
+
+			<ul>
+				<li>Deep clone</li>
+				<li>Copy every child element</li>
+				<li>Copy nested HTML</li>
+			</ul>
+
+			<p>If you used <code>false</code>, only the root fragment would be copied, not its children.</p>
+		</section>
+
+		<section>
+			<h2>&lt;template&gt; vs Hidden Elements</h2>
+
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th>&lt;template&gt;</th>
+					<th>Hidden &lt;div&gt;<br />(display:none)</th>
+				</tr>
+
+				<tr>
+					<td>Visible on page</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>Part of rendered layout</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>Parsed into active DOM</td>
+					<td>No (stored in <code>template.content</code>)</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Accessible with normal selectors</td>
+					<td>No (must use <code>template.content</code>)</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Consumes rendering work</td>
+					<td>Very little</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Scripts inside execute immediately</td>
+					<td>No</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>Images start loading immediately</td>
+					<td>No</td>
+					<td>Usually yes</td>
+				</tr>
+
+				<tr>
+					<td>Purpose</td>
+					<td>Reusable HTML blueprint</td>
+					<td>Hide existing DOM</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Advantages</h2>
+
+			<ul>
+				<li>Cleaner JavaScript</li>
+
+				<li>Reusable UI components</li>
+
+				<li>No duplicated HTML strings</li>
+
+				<li>Easy to maintain</li>
+
+				<li>Safer than building HTML with string concatenation</li>
+
+				<li>Works well with loops</li>
+
+				<li>Very fast for repeated UI creation</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Disadvantages</h2>
+
+			<ul>
+				<li>Requires JavaScript</li>
+
+				<li>Cannot display itself</li>
+
+				<li>You must clone it before using it</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<div class="note">
+				<p>
+					The <code>&lt;template&gt;</code> element is supported by all modern browsers, including Chrome, Edge, Firefox, Safari,
+					and Opera.
+				</p>
+
+				<p>Internet Explorer does not fully support the HTML Template element.</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Best Practices</h2>
+
+			<ul>
+				<li>Use templates for repeated UI.</li>
+
+				<li>Keep one template for one component.</li>
+
+				<li>Update cloned content before inserting it.</li>
+
+				<li>Avoid constructing long HTML strings with JavaScript.</li>
+
+				<li>Combine templates with loops for dynamic rendering.</li>
+			</ul>
+		</section>
+
+		<footer>
+			Open Developer Tools (F12) and inspect the page. You'll notice that the template itself never appears in the rendered DOM
+			until JavaScript clones it.
+		</footer>
+
+		<script>
+			// ---------------------------------------------------
+			// Example 1
+			// ---------------------------------------------------
+
+			document.getElementById('createCard').addEventListener('click', () => {
+				const template = document.getElementById('cardTemplate');
+
+				const clone = template.content.cloneNode(true);
+
+				document.getElementById('cards').appendChild(clone);
+			});
+
+			// ---------------------------------------------------
+			// Example 2
+			// ---------------------------------------------------
+
+			const users = [
+				{
+					name: 'Alice',
+					job: 'Designer',
+				},
+				{
+					name: 'Bob',
+					job: 'Developer',
+				},
+				{
+					name: 'Charlie',
+					job: 'Project Manager',
+				},
+			];
+
+			document.getElementById('createUsers').addEventListener('click', () => {
+				const container = document.getElementById('users');
+
+				container.innerHTML = '';
+
+				const template = document.getElementById('userTemplate');
+
+				users.forEach((user) => {
+					const clone = template.content.cloneNode(true);
+
+					clone.querySelector('.name').textContent = user.name;
+
+					clone.querySelector('.job').textContent = user.job;
+
+					container.appendChild(clone);
+				});
+			});
+		</script>
+	</body>
+</html>
