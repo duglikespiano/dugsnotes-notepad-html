@@ -1,0 +1,427 @@
+<!-- https://youtu.be/HgNDii20FG4?t=220&si=WC1BuETvGMnQPsjL -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>HTML &lt;input&gt; and &lt;datalist&gt; Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				max-width: 1000px;
+				margin: 40px auto;
+				padding: 20px;
+				background: #f5f7fb;
+				color: #222;
+			}
+
+			h1,
+			h2 {
+				color: #0054a6;
+			}
+
+			section {
+				background: white;
+				padding: 24px;
+				margin-bottom: 30px;
+				border-radius: 10px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			}
+
+			code {
+				background: #efefef;
+				padding: 2px 6px;
+				border-radius: 4px;
+			}
+
+			pre {
+				background: #272822;
+				color: #f8f8f2;
+				padding: 16px;
+				overflow-x: auto;
+				border-radius: 8px;
+			}
+
+			.demo {
+				margin: 20px 0;
+				padding: 18px;
+				border: 2px solid #ddd;
+				border-radius: 8px;
+				background: #fafafa;
+			}
+
+			.demo label {
+				display: block;
+				margin-top: 15px;
+				font-weight: bold;
+			}
+
+			.demo input,
+			.demo button {
+				margin-top: 8px;
+				padding: 10px;
+				font-size: 16px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #0054a6;
+				color: white;
+			}
+
+			.notice {
+				background: #fff7d6;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			.success {
+				background: #e8f8e8;
+				border-left: 5px solid green;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			.warning {
+				background: #ffecec;
+				border-left: 5px solid red;
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			small {
+				color: #666;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>HTML &lt;input&gt; and &lt;datalist&gt;</h1>
+
+		<p>
+			The <code>&lt;input&gt;</code> element is one of the most commonly used HTML form controls. It allows users to enter data
+			such as text, numbers, dates, emails, passwords, colors, files, and much more.
+		</p>
+
+		<p>
+			The <code>&lt;datalist&gt;</code> element provides a list of suggested values for an <code>&lt;input&gt;</code>. Unlike a
+			traditional dropdown (<code>&lt;select&gt;</code>), users can either choose one of the suggestions or type their own custom
+			value.
+		</p>
+
+		<hr />
+
+		<section>
+			<h2>Basic &lt;input&gt; Example</h2>
+
+			<div class="demo">
+				<label>
+					Your name
+					<br />
+					<input type="text" placeholder="Enter your name" />
+				</label>
+
+				<label>
+					Email
+					<br />
+					<input type="email" placeholder="john@example.com" />
+				</label>
+
+				<label>
+					Age
+					<br />
+					<input type="number" min="1" max="120" />
+				</label>
+
+				<label>
+					Birthday
+					<br />
+					<input type="date" />
+				</label>
+
+				<label>
+					Favorite color
+					<br />
+					<input type="color" />
+				</label>
+
+				<label>
+					Password
+					<br />
+					<input type="password" />
+				</label>
+			</div>
+
+			<pre>
+&lt;input type="text"&gt;
+&lt;input type="email"&gt;
+&lt;input type="number"&gt;
+&lt;input type="date"&gt;
+&lt;input type="color"&gt;
+&lt;input type="password"&gt;
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Basic &lt;datalist&gt; Example</h2>
+
+			<p>Start typing inside the textbox. The browser will suggest matching values.</p>
+
+			<div class="demo">
+				<label>
+					Favorite programming language
+					<br />
+					<input type="text" list="languages" placeholder="Start typing..." />
+				</label>
+
+				<datalist id="languages">
+					<option value="JavaScript"></option>
+					<option value="TypeScript"></option>
+					<option value="Python"></option>
+					<option value="Java"></option>
+					<option value="C#"></option>
+					<option value="C++"></option>
+					<option value="Go"></option>
+					<option value="Rust"></option>
+					<option value="PHP"></option>
+					<option value="Swift"></option>
+				</datalist>
+			</div>
+
+			<pre>
+&lt;input list="languages"&gt;
+
+&lt;datalist id="languages"&gt;
+    &lt;option value="JavaScript"&gt;
+    &lt;option value="Python"&gt;
+    &lt;option value="Rust"&gt;
+&lt;/datalist&gt;
+</pre
+			>
+
+			<div class="success">
+				The user may select one of the suggestions OR type a completely different value. The datalist does
+				<strong>not</strong> restrict the user's input.
+			</div>
+		</section>
+
+		<section>
+			<h2>Country Autocomplete</h2>
+
+			<div class="demo">
+				<label>
+					Country
+					<br />
+					<input list="countries" placeholder="Type a country" />
+
+					<datalist id="countries">
+						<option value="United States"></option>
+						<option value="Canada"></option>
+						<option value="United Kingdom"></option>
+						<option value="Japan"></option>
+						<option value="South Korea"></option>
+						<option value="Australia"></option>
+						<option value="Germany"></option>
+						<option value="France"></option>
+						<option value="Italy"></option>
+						<option value="Brazil"></option>
+						<option value="Mexico"></option>
+						<option value="India"></option>
+					</datalist>
+				</label>
+			</div>
+		</section>
+
+		<section>
+			<h2>Browser Suggestions Are Filtered Automatically</h2>
+
+			<p>If the user types:</p>
+
+			<ul>
+				<li><strong>J</strong> → JavaScript, Java, Japan</li>
+				<li><strong>P</strong> → Python, PHP</li>
+				<li><strong>Ru</strong> → Rust</li>
+			</ul>
+
+			<p>Filtering is performed by the browser. No JavaScript is required.</p>
+		</section>
+
+		<section>
+			<h2>Using JavaScript with a Datalist</h2>
+
+			<div class="demo">
+				<label>
+					Choose a fruit
+					<br />
+
+					<input id="fruitInput" list="fruits" placeholder="Type or choose" />
+
+					<datalist id="fruits">
+						<option value="Apple"></option>
+						<option value="Banana"></option>
+						<option value="Orange"></option>
+						<option value="Mango"></option>
+						<option value="Peach"></option>
+						<option value="Pear"></option>
+					</datalist>
+				</label>
+
+				<br /><br />
+
+				<button id="showButton">Show Selected Fruit</button>
+
+				<p id="output"></p>
+			</div>
+
+			<pre>
+const input = document.getElementById("fruitInput");
+
+console.log(input.value);
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Difference Between &lt;datalist&gt; and &lt;select&gt;</h2>
+
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th>&lt;datalist&gt;</th>
+					<th>&lt;select&gt;</th>
+				</tr>
+
+				<tr>
+					<td>User can type custom text</td>
+					<td>✔ Yes</td>
+					<td>✘ No</td>
+				</tr>
+
+				<tr>
+					<td>Provides suggestions</td>
+					<td>✔ Yes</td>
+					<td>✔ Yes</td>
+				</tr>
+
+				<tr>
+					<td>Restricts to predefined options</td>
+					<td>✘ No</td>
+					<td>✔ Yes</td>
+				</tr>
+
+				<tr>
+					<td>Autocomplete experience</td>
+					<td>✔ Yes</td>
+					<td>✘ Usually No</td>
+				</tr>
+
+				<tr>
+					<td>Best for</td>
+					<td>Suggestions</td>
+					<td>Fixed choices</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>How &lt;input&gt; Connects to &lt;datalist&gt;</h2>
+
+			<p>
+				The connection happens through the
+				<code>list</code> attribute.
+			</p>
+
+			<pre>
+&lt;input list="cities"&gt;
+
+&lt;datalist id="cities"&gt;
+    ...
+&lt;/datalist&gt;
+</pre
+			>
+
+			<p>The value of the <code>list</code> attribute must exactly match the <code>id</code> of the datalist.</p>
+		</section>
+
+		<section>
+			<h2>Important Notes</h2>
+
+			<div class="notice">
+				<ul>
+					<li>A <code>&lt;datalist&gt;</code> is invisible until connected to an <code>&lt;input&gt;</code>.</li>
+
+					<li>
+						Only inputs that support text entry (such as
+						<code>text</code>, <code>search</code>, <code>url</code>, <code>email</code>, <code>tel</code>, and some others) can
+						effectively use a datalist.
+					</li>
+
+					<li>The browser controls how suggestions are displayed. You cannot fully customize the dropdown using CSS.</li>
+
+					<li>Users can ignore every suggestion and type their own value.</li>
+
+					<li>If you need users to select only predefined options, use <code>&lt;select&gt;</code> instead.</li>
+				</ul>
+			</div>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<div class="warning">
+				<p>The <code>&lt;input&gt;</code> element is universally supported across all modern browsers.</p>
+
+				<p>
+					The <code>&lt;datalist&gt;</code> element is supported by all major modern browsers (Chrome, Edge, Firefox, Safari, and
+					Opera), but there are a few limitations:
+				</p>
+
+				<ul>
+					<li>Its appearance varies between browsers and operating systems.</li>
+
+					<li>You cannot reliably style the suggestion dropdown with CSS.</li>
+
+					<li>Accessibility support has historically been inconsistent in some browsers and screen readers.</li>
+
+					<li>Some older browsers either do not support <code>&lt;datalist&gt;</code> or provide only partial support.</li>
+				</ul>
+
+				<p>
+					For maximum compatibility and complete control over styling and behavior, many websites use JavaScript autocomplete
+					libraries instead of the native
+					<code>&lt;datalist&gt;</code>.
+				</p>
+			</div>
+		</section>
+
+		<script>
+			const button = document.getElementById('showButton');
+			const input = document.getElementById('fruitInput');
+			const output = document.getElementById('output');
+
+			button.addEventListener('click', () => {
+				output.textContent = `You selected: ${input.value}`;
+			});
+		</script>
+	</body>
+</html>
