@@ -1,0 +1,281 @@
+<!-- https://youtu.be/HgNDii20FG4?t=368&si=r2ZvtkONVb_tGfOZ -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>HTML inert Attribute Demo</title>
+
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				max-width: 1100px;
+				margin: auto;
+				padding: 40px;
+				line-height: 1.6;
+			}
+
+			h1,
+			h2 {
+				margin-top: 40px;
+			}
+
+			section {
+				border: 1px solid #ccc;
+				padding: 20px;
+				margin: 25px 0;
+				border-radius: 10px;
+			}
+
+			.demo {
+				padding: 20px;
+				border-radius: 8px;
+				border: 2px solid #4b7bec;
+				margin-top: 15px;
+			}
+
+			.demo[inert] {
+				opacity: 0.45;
+				background: #f4f4f4;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 10px;
+				text-align: left;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 5px;
+				border-radius: 4px;
+			}
+
+			button {
+				margin: 6px 0;
+			}
+
+			.note {
+				background: #fff8d7;
+				padding: 15px;
+				border-left: 5px solid orange;
+				margin-top: 20px;
+			}
+
+			pre {
+				background: #272822;
+				color: #f8f8f2;
+				padding: 15px;
+				overflow: auto;
+				border-radius: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>The HTML <code>inert</code> Attribute</h1>
+
+		<p>The <code>inert</code> attribute makes an element and everything inside it completely non-interactive.</p>
+
+		<ul>
+			<li>Cannot receive mouse clicks.</li>
+			<li>Cannot receive keyboard focus.</li>
+			<li>Cannot be reached with the Tab key.</li>
+			<li>Input fields cannot be edited.</li>
+			<li>Buttons cannot be pressed.</li>
+			<li>Links cannot be activated.</li>
+			<li>Screen readers generally ignore the subtree.</li>
+		</ul>
+
+		<div class="note">
+			<strong>Try it:</strong>
+			Click the button below to toggle the
+			<code>inert</code> attribute. Then try clicking the controls inside the blue box. Also try pressing the
+			<strong>Tab</strong> key.
+		</div>
+
+		<section>
+			<h2>Interactive Example</h2>
+
+			<button id="toggle">Enable inert</button>
+
+			<p id="status">
+				Current state:
+				<strong>Interactive</strong>
+			</p>
+
+			<div id="panel" class="demo">
+				<h3>Settings Panel</h3>
+
+				<label>
+					Name:
+					<input type="text" placeholder="Type here" />
+				</label>
+
+				<br /><br />
+
+				<label>
+					Email:
+					<input type="email" placeholder="example@email.com" />
+				</label>
+
+				<br /><br />
+
+				<button>Save</button>
+
+				<button>Delete</button>
+
+				<br /><br />
+
+				<a href="https://example.com" target="_blank"> Example Link </a>
+			</div>
+		</section>
+
+		<section>
+			<h2>How it works</h2>
+
+			<p>Initially, the panel is fully interactive.</p>
+
+			<p>
+				When JavaScript adds the
+				<code>inert</code>
+				attribute:
+			</p>
+
+			<pre>
+panel.setAttribute("inert", "");
+</pre
+			>
+
+			<p>The browser automatically disables all interaction inside the panel. No extra JavaScript is required.</p>
+
+			<p>Removing it restores everything:</p>
+
+			<pre>
+panel.removeAttribute("inert");
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Comparison</h2>
+
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th><code>inert</code></th>
+					<th><code>disabled</code></th>
+					<th><code>hidden</code></th>
+					<th><code>pointer-events:none</code></th>
+				</tr>
+
+				<tr>
+					<td>Works on any HTML element</td>
+					<td>✔</td>
+					<td>❌ (form controls only)</td>
+					<td>✔</td>
+					<td>✔</td>
+				</tr>
+
+				<tr>
+					<td>Blocks mouse interaction</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>✔ (not visible)</td>
+					<td>✔</td>
+				</tr>
+
+				<tr>
+					<td>Blocks keyboard focus</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>❌</td>
+				</tr>
+
+				<tr>
+					<td>Blocks typing in inputs</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>❌</td>
+				</tr>
+
+				<tr>
+					<td>Removes from accessibility tree</td>
+					<td>Generally yes</td>
+					<td>No</td>
+					<td>Yes</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>Element remains visible</td>
+					<td>✔</td>
+					<td>✔</td>
+					<td>❌</td>
+					<td>✔</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Common Use Cases</h2>
+
+			<ul>
+				<li>Disable the page behind a modal dialog.</li>
+
+				<li>Prevent interaction while data is loading.</li>
+
+				<li>Temporarily disable a sidebar.</li>
+
+				<li>Make a wizard step inactive until the previous step is complete.</li>
+
+				<li>Disable unfinished UI sections without hiding them.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<p>
+				The <code>inert</code> attribute is now supported by all major modern browsers, including Chrome, Edge, Firefox, and
+				Safari.
+			</p>
+
+			<p>
+				Historically, browsers required a JavaScript polyfill because
+				<code>inert</code> was experimental. If you need to support very old browsers, you may still need a polyfill.
+			</p>
+		</section>
+
+		<script>
+			const panel = document.getElementById('panel');
+			const button = document.getElementById('toggle');
+			const status = document.getElementById('status');
+
+			button.addEventListener('click', () => {
+				if (panel.hasAttribute('inert')) {
+					panel.removeAttribute('inert');
+
+					button.textContent = 'Enable inert';
+
+					status.innerHTML = 'Current state: <strong>Interactive</strong>';
+				} else {
+					panel.setAttribute('inert', '');
+
+					button.textContent = 'Disable inert';
+
+					status.innerHTML = 'Current state: <strong>Inert (non-interactive)</strong>';
+				}
+			});
+		</script>
+	</body>
+</html>
