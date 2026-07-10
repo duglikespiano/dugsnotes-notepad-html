@@ -1,0 +1,440 @@
+<!-- https://youtu.be/HgNDii20FG4?t=578&si=6-xtmV-b38qPCdBS -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HTML &lt;picture&gt; Element Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: system-ui, sans-serif;
+				line-height: 1.6;
+				margin: 40px auto;
+				max-width: 1100px;
+				padding: 0 20px;
+				background: #f6f8fa;
+				color: #222;
+			}
+
+			h1,
+			h2 {
+				color: #0057b8;
+			}
+
+			section {
+				background: white;
+				border-radius: 10px;
+				padding: 24px;
+				margin-bottom: 30px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			}
+
+			pre {
+				background: #272822;
+				color: #f8f8f2;
+				padding: 16px;
+				overflow-x: auto;
+				border-radius: 8px;
+			}
+
+			code {
+				font-family: Consolas, monospace;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #eef4ff;
+			}
+
+			.demo {
+				border: 2px dashed #bbb;
+				padding: 20px;
+				margin-top: 20px;
+				border-radius: 8px;
+			}
+
+			img {
+				max-width: 100%;
+				border-radius: 8px;
+			}
+
+			.note {
+				background: #fff8db;
+				border-left: 5px solid orange;
+				padding: 12px;
+				margin: 20px 0;
+			}
+
+			.warning {
+				background: #ffeaea;
+				border-left: 5px solid crimson;
+				padding: 12px;
+				margin: 20px 0;
+			}
+
+			.success {
+				background: #edfced;
+				border-left: 5px solid green;
+				padding: 12px;
+				margin: 20px 0;
+			}
+
+			.small {
+				color: #666;
+				font-size: 0.9rem;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>HTML &lt;picture&gt; Element</h1>
+
+		<p>
+			The <strong>&lt;picture&gt;</strong> element allows the browser to choose the most appropriate image from multiple sources.
+		</p>
+
+		<p>Unlike a normal <code>&lt;img&gt;</code>, a <code>&lt;picture&gt;</code> can provide:</p>
+
+		<ul>
+			<li>Different images for different screen sizes (Responsive Images)</li>
+			<li>Modern image formats (AVIF, WebP) with JPEG fallback</li>
+			<li>Different image crops for mobile and desktop (Art Direction)</li>
+		</ul>
+
+		<div class="note">
+			<strong>Important:</strong>
+			The browser checks each
+			<code>&lt;source&gt;</code> from top to bottom. The first matching source is used. If none match, the final
+			<code>&lt;img&gt;</code>
+			is displayed.
+		</div>
+
+		<hr />
+
+		<section>
+			<h2>Basic Syntax</h2>
+
+			<pre><code>&lt;picture&gt;
+    &lt;source srcset="image.avif" type="image/avif"&gt;
+    &lt;source srcset="image.webp" type="image/webp"&gt;
+    &lt;img src="image.jpg" alt="Example"&gt;
+&lt;/picture&gt;
+</code></pre>
+
+			<p>
+				The <code>&lt;img&gt;</code> is always required because it acts as the fallback image. Older browsers that don't
+				understand
+				<code>&lt;picture&gt;</code>
+				will simply display the
+				<code>&lt;img&gt;</code>.
+			</p>
+		</section>
+
+		<section>
+			<h2>Example 1 — Image Format Fallback</h2>
+
+			<p>Modern browsers support AVIF and WebP, which are usually much smaller than JPEG.</p>
+
+			<pre><code>&lt;picture&gt;
+    &lt;source srcset="mountain.avif" type="image/avif"&gt;
+    &lt;source srcset="mountain.webp" type="image/webp"&gt;
+    &lt;img src="mountain.jpg" alt="Mountain"&gt;
+&lt;/picture&gt;
+</code></pre>
+
+			<div class="demo">
+				<p>This demo uses placeholder images because local files are not included.</p>
+
+				<picture>
+					<source srcset="https://picsum.photos/800/400.webp" type="image/webp" />
+
+					<img src="https://picsum.photos/800/400" alt="Placeholder landscape" />
+				</picture>
+			</div>
+		</section>
+
+		<section>
+			<h2>Example 2 — Responsive Images</h2>
+
+			<p>Different images can be used depending on screen width.</p>
+
+			<pre><code>&lt;picture&gt;
+
+    &lt;source
+        media="(max-width:600px)"
+        srcset="mobile.jpg"&gt;
+
+    &lt;source
+        media="(max-width:1000px)"
+        srcset="tablet.jpg"&gt;
+
+    &lt;img
+        src="desktop.jpg"
+        alt="Landscape"&gt;
+
+&lt;/picture&gt;
+</code></pre>
+
+			<div class="demo">
+				<p>
+					Resize your browser window. Although these placeholder images are similar, the browser will actually choose different
+					image files.
+				</p>
+
+				<picture>
+					<source media="(max-width:600px)" srcset="https://picsum.photos/400/400" />
+
+					<source media="(max-width:1000px)" srcset="https://picsum.photos/800/400" />
+
+					<img src="https://picsum.photos/1200/400" alt="Responsive placeholder" />
+				</picture>
+			</div>
+		</section>
+
+		<section>
+			<h2>Example 3 — Art Direction</h2>
+
+			<p>Sometimes you don't just want a smaller image—you want an entirely different crop.</p>
+
+			<table>
+				<tr>
+					<th>Desktop</th>
+					<th>Mobile</th>
+				</tr>
+
+				<tr>
+					<td>Wide landscape photo</td>
+					<td>Tightly cropped portrait photo</td>
+				</tr>
+
+				<tr>
+					<td>Shows entire scenery</td>
+					<td>Focuses on the main subject</td>
+				</tr>
+			</table>
+
+			<pre><code>&lt;picture&gt;
+
+    &lt;source
+        media="(max-width:700px)"
+        srcset="portrait.jpg"&gt;
+
+    &lt;img
+        src="landscape.jpg"
+        alt="Nature"&gt;
+
+&lt;/picture&gt;
+</code></pre>
+		</section>
+
+		<section>
+			<h2>How the Browser Chooses an Image</h2>
+
+			<pre><code>1. Look at the first &lt;source&gt;
+
+      ↓
+
+2. Does media match?
+
+      ↓
+
+3. Is image type supported?
+
+      ↓
+
+4. Use this image
+
+      ↓
+
+Otherwise...
+
+      ↓
+
+Try next &lt;source&gt;
+
+      ↓
+
+No matches?
+
+      ↓
+
+Display &lt;img&gt;
+</code></pre>
+		</section>
+
+		<section>
+			<h2>&lt;picture&gt; vs &lt;img&gt;</h2>
+
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th>&lt;img&gt;</th>
+					<th>&lt;picture&gt;</th>
+				</tr>
+
+				<tr>
+					<td>Single image</td>
+					<td>✅</td>
+					<td>✅</td>
+				</tr>
+
+				<tr>
+					<td>Multiple image formats</td>
+					<td>❌</td>
+					<td>✅</td>
+				</tr>
+
+				<tr>
+					<td>Responsive images</td>
+					<td>Limited (srcset)</td>
+					<td>Excellent</td>
+				</tr>
+
+				<tr>
+					<td>Different crops</td>
+					<td>❌</td>
+					<td>✅</td>
+				</tr>
+
+				<tr>
+					<td>Modern format fallback</td>
+					<td>❌</td>
+					<td>✅</td>
+				</tr>
+
+				<tr>
+					<td>Requires fallback image</td>
+					<td>N/A</td>
+					<td>Yes (&lt;img&gt;)</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Common Attributes</h2>
+
+			<table>
+				<tr>
+					<th>Element</th>
+					<th>Attribute</th>
+					<th>Purpose</th>
+				</tr>
+
+				<tr>
+					<td>&lt;source&gt;</td>
+					<td>srcset</td>
+					<td>Image file to use</td>
+				</tr>
+
+				<tr>
+					<td>&lt;source&gt;</td>
+					<td>media</td>
+					<td>Media query (screen width, etc.)</td>
+				</tr>
+
+				<tr>
+					<td>&lt;source&gt;</td>
+					<td>type</td>
+					<td>MIME type (image/webp, image/avif)</td>
+				</tr>
+
+				<tr>
+					<td>&lt;img&gt;</td>
+					<td>src</td>
+					<td>Fallback image</td>
+				</tr>
+
+				<tr>
+					<td>&lt;img&gt;</td>
+					<td>alt</td>
+					<td>Accessibility description</td>
+				</tr>
+
+				<tr>
+					<td>&lt;img&gt;</td>
+					<td>loading</td>
+					<td>Lazy loading</td>
+				</tr>
+
+				<tr>
+					<td>&lt;img&gt;</td>
+					<td>width / height</td>
+					<td>Reserve layout space to reduce layout shifts</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>When Should You Use &lt;picture&gt;?</h2>
+
+			<div class="success">
+				Use <strong>&lt;picture&gt;</strong> when:
+
+				<ul>
+					<li>✔ You want to serve AVIF/WebP with JPEG fallback.</li>
+					<li>✔ Mobile and desktop should use different image crops.</li>
+					<li>✔ You want different images for different screen sizes.</li>
+					<li>✔ Performance matters.</li>
+				</ul>
+			</div>
+
+			<div class="note">
+				A normal <code>&lt;img&gt;</code> with
+				<code>srcset</code>
+				and
+				<code>sizes</code>
+				is often enough when only the image resolution changes. Use
+				<code>&lt;picture&gt;</code>
+				when you need format selection (such as AVIF or WebP) or completely different image sources based on media queries.
+			</div>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<p>
+				The <code>&lt;picture&gt;</code> element is supported by all modern browsers, including Chrome, Edge, Firefox, Safari, and
+				modern mobile browsers. Support has been widely available since around 2016.
+			</p>
+
+			<div class="warning">
+				The browser can only choose among image formats that it supports. For example, if AVIF is unsupported, it automatically
+				falls back to the next matching
+				<code>&lt;source&gt;</code> (such as WebP), and finally to the <code>&lt;img&gt;</code> fallback.
+			</div>
+		</section>
+
+		<section>
+			<h2>Best Practices</h2>
+
+			<ul>
+				<li>Always include an <code>&lt;img&gt;</code> fallback.</li>
+				<li>Always provide meaningful <code>alt</code> text.</li>
+				<li>Put the most preferred image format (AVIF) first.</li>
+				<li>Provide WebP before JPEG when possible.</li>
+				<li>Use <code>loading="lazy"</code> for images below the fold.</li>
+				<li>Specify <code>width</code> and <code>height</code> on the <code>&lt;img&gt;</code> to reduce layout shifts.</li>
+				<li>
+					Use <code>&lt;picture&gt;</code> only when multiple sources are actually needed; a simple <code>&lt;img&gt;</code> is
+					easier to maintain for single-image cases.
+				</li>
+			</ul>
+		</section>
+	</body>
+</html>
