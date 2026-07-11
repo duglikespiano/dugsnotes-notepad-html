@@ -1,0 +1,372 @@
+<!-- https://youtu.be/HgNDii20FG4?t=877&si=Eq4sec6-_UBmAzSi -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HTML &lt;output&gt; Element Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family:
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					sans-serif;
+				margin: 40px;
+				line-height: 1.6;
+				background: #f6f7fb;
+				color: #222;
+			}
+
+			section {
+				background: white;
+				padding: 24px;
+				border-radius: 12px;
+				margin-bottom: 40px;
+				box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+			}
+
+			.demo {
+				border: 1px solid #ccc;
+				padding: 20px;
+				border-radius: 8px;
+				margin-top: 15px;
+				background: #fafafa;
+			}
+
+			.result {
+				display: inline-block;
+				min-width: 80px;
+				padding: 4px 10px;
+				background: #dff3ff;
+				border-radius: 5px;
+				font-weight: bold;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #bbb;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #eee;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 5px;
+				border-radius: 4px;
+			}
+
+			pre {
+				background: #222;
+				color: #ddd;
+				padding: 16px;
+				overflow: auto;
+				border-radius: 8px;
+			}
+
+			input[type='number'] {
+				width: 80px;
+			}
+
+			small {
+				color: #666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>HTML &lt;output&gt; Element</h1>
+
+		<p>
+			The <code>&lt;output&gt;</code> element represents the result of a calculation, user action, or script. It is commonly used
+			together with forms, JavaScript, sliders, calculators, and interactive controls.
+		</p>
+
+		<section>
+			<h2>Basic Syntax</h2>
+
+			<pre>
+&lt;output id="result"&gt;0&lt;/output&gt;
+</pre
+			>
+
+			<p>
+				Unlike a normal <code>&lt;span&gt;</code>, an <code>&lt;output&gt;</code> element has semantic meaning: it tells browsers
+				and assistive technologies that this value is the result of some computation.
+			</p>
+		</section>
+
+		<section>
+			<h2>Example 1 - Addition Calculator</h2>
+
+			<div class="demo">
+				<label>
+					First Number:
+					<input id="num1" type="number" value="10" />
+				</label>
+
+				<br /><br />
+
+				<label>
+					Second Number:
+					<input id="num2" type="number" value="20" />
+				</label>
+
+				<br /><br />
+
+				<button onclick="addNumbers()">Calculate</button>
+
+				<p>
+					Result:
+					<output id="sumOutput" class="result">30</output>
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Example 2 - Live Range Slider</h2>
+
+			<div class="demo">
+				<input id="volume" type="range" min="0" max="100" value="40" oninput="volumeOutput.value = value" />
+
+				<output id="volumeOutput" name="volumeOutput"> 40 </output>
+
+				<p>
+					Moving the slider automatically updates the
+					<code>&lt;output&gt;</code>.
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Example 3 - BMI Calculator</h2>
+
+			<div class="demo">
+				<label>
+					Height (cm):
+					<input id="height" type="number" value="175" />
+				</label>
+
+				<br /><br />
+
+				<label>
+					Weight (kg):
+					<input id="weight" type="number" value="70" />
+				</label>
+
+				<br /><br />
+
+				<button onclick="calculateBMI()">Calculate BMI</button>
+
+				<p>
+					BMI:
+					<output id="bmiOutput" class="result"> 22.86 </output>
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Example 4 - Using &lt;output&gt; Inside a Form</h2>
+
+			<div class="demo">
+				<form oninput="total.value = parseFloat(price.value || 0) * parseInt(quantity.value || 0)">
+					<label>
+						Price:
+						<input name="price" type="number" value="15" step="0.01" />
+					</label>
+
+					<br /><br />
+
+					<label>
+						Quantity:
+						<input name="quantity" type="number" value="2" />
+					</label>
+
+					<br /><br />
+
+					Total:
+
+					<output name="total"> 30 </output>
+				</form>
+
+				<p>
+					Notice that JavaScript is not required here. The calculation happens through the form's
+					<code>oninput</code> attribute.
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>&lt;output&gt; Attributes</h2>
+
+			<table>
+				<tr>
+					<th>Attribute</th>
+					<th>Description</th>
+				</tr>
+
+				<tr>
+					<td><code>id</code></td>
+					<td>Allows JavaScript to locate the output.</td>
+				</tr>
+
+				<tr>
+					<td><code>name</code></td>
+					<td>Name of the output within a form.</td>
+				</tr>
+
+				<tr>
+					<td><code>for</code></td>
+					<td>Lists the IDs of elements that contributed to the result. Mostly used for semantics and accessibility.</td>
+				</tr>
+			</table>
+
+			<p>Example:</p>
+
+			<pre>
+<output
+    name="total"
+    for="price quantity">
+</output>
+</pre>
+		</section>
+
+		<section>
+			<h2>&lt;output&gt; vs Similar Elements</h2>
+
+			<table>
+				<tr>
+					<th>Element</th>
+					<th>Purpose</th>
+					<th>Editable?</th>
+					<th>Semantic Meaning</th>
+				</tr>
+
+				<tr>
+					<td>&lt;output&gt;</td>
+					<td>Calculated result</td>
+					<td>No</td>
+					<td>Yes</td>
+				</tr>
+
+				<tr>
+					<td>&lt;span&gt;</td>
+					<td>Generic inline container</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>&lt;div&gt;</td>
+					<td>Generic block container</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+
+				<tr>
+					<td>&lt;input&gt;</td>
+					<td>User input</td>
+					<td>Yes</td>
+					<td>User-entered value</td>
+				</tr>
+
+				<tr>
+					<td>&lt;meter&gt;</td>
+					<td>Measurement within a range</td>
+					<td>No</td>
+					<td>Represents a measured value</td>
+				</tr>
+
+				<tr>
+					<td>&lt;progress&gt;</td>
+					<td>Task progress</td>
+					<td>No</td>
+					<td>Represents progress completion</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<p>
+				✅ Chrome<br />
+				✅ Edge<br />
+				✅ Firefox<br />
+				✅ Safari<br />
+				✅ Opera
+			</p>
+
+			<p>
+				The <code>&lt;output&gt;</code> element has excellent browser support and has been available across all major browsers for
+				many years.
+			</p>
+		</section>
+
+		<section>
+			<h2>When Should You Use &lt;output&gt;?</h2>
+
+			<ul>
+				<li>✔ Calculator results</li>
+
+				<li>✔ Price totals</li>
+
+				<li>✔ Live slider values</li>
+
+				<li>✔ Form calculations</li>
+
+				<li>✔ BMI or unit converters</li>
+
+				<li>✔ Interactive educational tools</li>
+
+				<li>✔ Any computed value generated by JavaScript</li>
+			</ul>
+
+			<p>
+				If the displayed value is the <strong>result of a calculation or user interaction</strong>, <code>&lt;output&gt;</code> is
+				usually a better semantic choice than using a generic <code>&lt;span&gt;</code>.
+			</p>
+		</section>
+
+		<script>
+			function addNumbers() {
+				const a = Number(document.getElementById('num1').value);
+				const b = Number(document.getElementById('num2').value);
+
+				document.getElementById('sumOutput').value = a + b;
+				document.getElementById('sumOutput').textContent = a + b;
+			}
+
+			function calculateBMI() {
+				const h = document.getElementById('height').value / 100;
+				const w = document.getElementById('weight').value;
+
+				const bmi = (w / (h * h)).toFixed(2);
+
+				document.getElementById('bmiOutput').value = bmi;
+				document.getElementById('bmiOutput').textContent = bmi;
+			}
+		</script>
+	</body>
+</html>
