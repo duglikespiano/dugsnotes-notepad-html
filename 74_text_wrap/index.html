@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>CSS text-wrap Property Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				margin: 40px;
+				line-height: 1.6;
+				background: #f4f6f8;
+			}
+
+			h1,
+			h2 {
+				margin-top: 40px;
+			}
+
+			section {
+				margin-bottom: 60px;
+			}
+
+			.demo {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 20px;
+			}
+
+			.card {
+				background: white;
+				border-radius: 10px;
+				padding: 20px;
+				border: 1px solid #ccc;
+			}
+
+			.box {
+				width: 260px;
+				border: 2px solid royalblue;
+				padding: 12px;
+				margin-top: 15px;
+				background: #eef4ff;
+				font-size: 18px;
+			}
+
+			.code {
+				background: #222;
+				color: #fff;
+				padding: 10px;
+				border-radius: 6px;
+				font-family: monospace;
+				margin-top: 10px;
+				white-space: pre;
+			}
+
+			.small {
+				width: 180px;
+			}
+
+			.large {
+				width: 320px;
+			}
+
+			.note {
+				background: #fff7d6;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin: 25px 0;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #f0f0f0;
+			}
+
+			.wrap {
+				text-wrap: wrap;
+			}
+
+			.nowrap {
+				text-wrap: nowrap;
+			}
+
+			.balance {
+				text-wrap: balance;
+			}
+
+			.pretty {
+				text-wrap: pretty;
+			}
+
+			.stable {
+				text-wrap: stable;
+			}
+
+			.editable {
+				border: 2px dashed tomato;
+				min-height: 120px;
+				padding: 12px;
+				background: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS <code>text-wrap</code> Property</h1>
+
+		<p>
+			The <strong>text-wrap</strong> property controls how text is wrapped onto multiple lines. Some values prioritize balanced
+			line lengths, while others focus on preventing awkward breaks.
+		</p>
+
+		<div class="note">
+			<strong>Browser Support</strong>
+
+			<ul>
+				<li><strong>wrap</strong> and <strong>nowrap</strong> are widely supported.</li>
+				<li><strong>balance</strong> is supported in modern Chrome, Edge, Safari, and newer Firefox versions.</li>
+				<li><strong>pretty</strong> is newer and browser support is still improving.</li>
+				<li><strong>stable</strong> is mainly intended for editable content and has limited support.</li>
+				<li>If your browser doesn't support a value, it will usually behave like <strong>wrap</strong>.</li>
+			</ul>
+		</div>
+
+		<h2>Comparison</h2>
+
+		<div class="demo">
+			<div class="card">
+				<h3>text-wrap: wrap (default)</h3>
+
+				<div class="code">text-wrap: wrap;</div>
+
+				<div class="box wrap">
+					CSS gives developers powerful tools to create beautiful and responsive websites for every device.
+				</div>
+
+				<p>The browser wraps text normally.</p>
+			</div>
+
+			<div class="card">
+				<h3>text-wrap: nowrap</h3>
+
+				<div class="code">text-wrap: nowrap;</div>
+
+				<div class="box nowrap">
+					CSS gives developers powerful tools to create beautiful and responsive websites for every device.
+				</div>
+
+				<p>Everything stays on one line and may overflow horizontally.</p>
+			</div>
+
+			<div class="card">
+				<h3>text-wrap: balance</h3>
+
+				<div class="code">text-wrap: balance;</div>
+
+				<div class="box balance">
+					CSS gives developers powerful tools to create beautiful and responsive websites for every device.
+				</div>
+
+				<p>The browser attempts to make every line a similar length. Great for titles and headings.</p>
+			</div>
+
+			<div class="card">
+				<h3>text-wrap: pretty</h3>
+
+				<div class="code">text-wrap: pretty;</div>
+
+				<div class="box pretty">
+					CSS gives developers powerful tools to create beautiful and responsive websites for every device.
+				</div>
+
+				<p>
+					The browser tries to avoid ugly line breaks and very short final lines. Differences may be subtle depending on browser
+					support.
+				</p>
+			</div>
+
+			<div class="card">
+				<h3>text-wrap: stable</h3>
+
+				<div class="code">text-wrap: stable;</div>
+
+				<div class="box stable">
+					CSS gives developers powerful tools to create beautiful and responsive websites for every device.
+				</div>
+
+				<p>
+					Mostly intended for editable text. Line breaks stay more stable while typing. If unsupported, it behaves like normal
+					wrapping.
+				</p>
+			</div>
+		</div>
+
+		<h2>Why <code>balance</code> is useful for headings</h2>
+
+		<p>Without balancing:</p>
+
+		<div class="box small wrap">Learning Modern CSS Layout Techniques for Responsive Websites</div>
+
+		<p>With balancing:</p>
+
+		<div class="box small balance">Learning Modern CSS Layout Techniques for Responsive Websites</div>
+
+		<p>
+			Notice how the balanced version usually distributes the words more evenly across lines instead of leaving one very short
+			line.
+		</p>
+
+		<h2>Width Comparison</h2>
+
+		<p>Resize your browser window to better observe how each value behaves.</p>
+
+		<div class="demo">
+			<div class="card">
+				<h3>Normal wrapping</h3>
+
+				<div class="box small wrap">Understanding CSS line wrapping behavior makes typography look much more professional.</div>
+
+				<div class="box large wrap">Understanding CSS line wrapping behavior makes typography look much more professional.</div>
+			</div>
+
+			<div class="card">
+				<h3>Balanced wrapping</h3>
+
+				<div class="box small balance">
+					Understanding CSS line wrapping behavior makes typography look much more professional.
+				</div>
+
+				<div class="box large balance">
+					Understanding CSS line wrapping behavior makes typography look much more professional.
+				</div>
+			</div>
+		</div>
+
+		<h2>Example for <code>stable</code></h2>
+
+		<p>
+			The <strong>stable</strong> value mainly benefits editable content. Try typing inside the editable box below. Browsers that
+			support <code>text-wrap: stable</code> attempt to keep existing line breaks from shifting excessively while you edit.
+		</p>
+
+		<div class="editable stable" contenteditable="true">Click here and start typing... Try adding or removing words.</div>
+
+		<h2>Comparison Table</h2>
+
+		<table>
+			<tr>
+				<th>Value</th>
+				<th>Purpose</th>
+				<th>Typical Use</th>
+				<th>Browser Support</th>
+			</tr>
+
+			<tr>
+				<td><code>wrap</code></td>
+				<td>Normal wrapping</td>
+				<td>General text</td>
+				<td>Excellent</td>
+			</tr>
+
+			<tr>
+				<td><code>nowrap</code></td>
+				<td>No wrapping</td>
+				<td>Buttons, labels, menus</td>
+				<td>Excellent</td>
+			</tr>
+
+			<tr>
+				<td><code>balance</code></td>
+				<td>Balanced line lengths</td>
+				<td>Headings, article titles</td>
+				<td>Good (modern browsers)</td>
+			</tr>
+
+			<tr>
+				<td><code>pretty</code></td>
+				<td>More attractive line breaks</td>
+				<td>Articles, paragraphs</td>
+				<td>Still improving</td>
+			</tr>
+
+			<tr>
+				<td><code>stable</code></td>
+				<td>Stable wrapping while editing</td>
+				<td>Editors, contenteditable</td>
+				<td>Limited</td>
+			</tr>
+		</table>
+
+		<h2>When should you use each?</h2>
+
+		<ul>
+			<li><strong>wrap</strong> → Normal paragraphs (default).</li>
+			<li><strong>nowrap</strong> → Navigation links, buttons, table headers.</li>
+			<li><strong>balance</strong> → Headlines and page titles.</li>
+			<li><strong>pretty</strong> → Long-form reading where typography matters.</li>
+			<li><strong>stable</strong> → Rich text editors or <code>contenteditable</code> elements.</li>
+		</ul>
+	</body>
+</html>
