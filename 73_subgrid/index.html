@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS subgrid - Complete Guide & Example</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				padding: 40px;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.7;
+				background: #f5f7fb;
+				color: #222;
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+			}
+
+			section {
+				background: white;
+				padding: 25px;
+				margin-bottom: 35px;
+				border-radius: 12px;
+				box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 5px;
+				border-radius: 4px;
+			}
+
+			pre {
+				background: #272822;
+				color: #eee;
+				padding: 18px;
+				border-radius: 8px;
+				overflow: auto;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 15px;
+			}
+
+			th,
+			td {
+				border: 1px solid #bbb;
+				padding: 10px;
+				text-align: left;
+				vertical-align: top;
+			}
+
+			th {
+				background: #efefef;
+			}
+
+			.good {
+				color: green;
+				font-weight: bold;
+			}
+
+			.bad {
+				color: crimson;
+				font-weight: bold;
+			}
+
+			/* ------------------------------------------------ */
+			/* Example Layout                                   */
+			/* ------------------------------------------------ */
+
+			.parent-grid {
+				display: grid;
+
+				/* Three equal columns */
+				grid-template-columns: repeat(3, 1fr);
+
+				gap: 20px;
+
+				margin-top: 30px;
+			}
+
+			.card {
+				display: grid;
+
+				/*
+          This is the magic.
+
+          Instead of defining its own columns,
+          the child inherits the parent's columns.
+      */
+				grid-template-columns: subgrid;
+
+				/*
+          Tell the browser to span all 3 parent columns.
+      */
+				grid-column: span 3;
+
+				border: 2px solid #3d74ff;
+				border-radius: 10px;
+				background: #eef4ff;
+				padding: 15px;
+			}
+
+			.cell {
+				padding: 15px;
+				border-radius: 8px;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.title {
+				background: #0077cc;
+			}
+
+			.description {
+				background: #18a558;
+			}
+
+			.price {
+				background: #d97706;
+			}
+
+			/* Comparison Example */
+
+			.comparison {
+				display: flex;
+				gap: 30px;
+				flex-wrap: wrap;
+			}
+
+			.box {
+				flex: 1;
+				min-width: 300px;
+			}
+
+			.normal-grid {
+				display: grid;
+				grid-template-columns: 1fr 2fr 80px;
+				gap: 8px;
+			}
+
+			.normal-grid .item,
+			.subgrid-demo .item {
+				background: steelblue;
+				color: white;
+				padding: 10px;
+				text-align: center;
+				border-radius: 6px;
+			}
+
+			.subgrid-parent {
+				display: grid;
+				grid-template-columns: 1fr 2fr 80px;
+				gap: 8px;
+			}
+
+			.subgrid-demo {
+				display: grid;
+				grid-template-columns: subgrid;
+				grid-column: span 3;
+				gap: 8px;
+			}
+
+			.note {
+				background: #fff8d7;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin-top: 20px;
+			}
+
+			.warning {
+				background: #ffe8e8;
+				border-left: 5px solid crimson;
+				padding: 15px;
+				margin-top: 20px;
+			}
+
+			.support {
+				background: #eefbea;
+				border-left: 5px solid green;
+				padding: 15px;
+				margin-top: 20px;
+			}
+
+			@media (max-width: 700px) {
+				.parent-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.card {
+					grid-column: span 1;
+					grid-template-columns: 1fr;
+				}
+
+				.comparison {
+					flex-direction: column;
+				}
+
+				.subgrid-parent {
+					grid-template-columns: 1fr;
+				}
+
+				.subgrid-demo {
+					grid-column: span 1;
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>CSS <code>subgrid</code></h1>
+
+		<section>
+			<h2>What is <code>subgrid</code>?</h2>
+
+			<p>
+				Normally, when you create a grid inside another grid, the child grid creates its
+				<strong>own independent columns and rows</strong>.
+			</p>
+
+			<p>
+				<code>subgrid</code> lets the child grid <strong>reuse the parent's grid tracks</strong>
+				instead of defining new ones.
+			</p>
+
+			<p>This is especially useful when multiple components need their content to line up perfectly.</p>
+
+			<pre>
+Parent Grid
++-----------+-------------------+------+
+
+Child Grid (without subgrid)
++---------+---------+---------+
+
+Child Grid (with subgrid)
++-----------+-------------------+------+
+(same column sizes as parent)
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Syntax</h2>
+
+			<pre>
+.parent{
+    display:grid;
+    grid-template-columns: 1fr 2fr 100px;
+}
+
+.child{
+    display:grid;
+
+    /* Inherit parent's columns */
+    grid-template-columns: subgrid;
+
+    /* Span all parent columns */
+    grid-column: span 3;
+}
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>Live Example</h2>
+
+			<p>
+				Each card below is itself a grid. Instead of defining new columns, it inherits the three columns from the parent using
+				<code>grid-template-columns: subgrid</code>.
+			</p>
+
+			<div class="parent-grid">
+				<div class="card">
+					<div class="cell title">Laptop</div>
+					<div class="cell description">High-performance developer laptop</div>
+					<div class="cell price">$1800</div>
+				</div>
+
+				<div class="card">
+					<div class="cell title">Keyboard</div>
+					<div class="cell description">Mechanical keyboard with RGB lighting</div>
+					<div class="cell price">$140</div>
+				</div>
+
+				<div class="card">
+					<div class="cell title">Monitor</div>
+					<div class="cell description">4K IPS Display</div>
+					<div class="cell price">$499</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>Without vs With <code>subgrid</code></h2>
+
+			<div class="comparison">
+				<div class="box">
+					<h3>Without subgrid</h3>
+
+					<p>Each nested grid defines its own columns. Nothing aligns automatically.</p>
+
+					<div class="normal-grid">
+						<div class="item">Name</div>
+						<div class="item">Description</div>
+						<div class="item">Price</div>
+					</div>
+				</div>
+
+				<div class="box">
+					<h3>With subgrid</h3>
+
+					<p>The nested grid automatically uses the parent's columns. Everything stays aligned.</p>
+
+					<div class="subgrid-parent">
+						<div class="subgrid-demo">
+							<div class="item">Name</div>
+							<div class="item">Description</div>
+							<div class="item">Price</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>When should you use <code>subgrid</code>?</h2>
+
+			<ul>
+				<li>✔ Product cards</li>
+
+				<li>✔ Pricing tables</li>
+
+				<li>✔ Dashboards</li>
+
+				<li>✔ Profile cards</li>
+
+				<li>✔ Calendars</li>
+
+				<li>✔ News/article layouts</li>
+
+				<li>✔ Forms with aligned labels</li>
+
+				<li>✔ Complex nested grid layouts</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Comparison Table</h2>
+
+			<table>
+				<tr>
+					<th>Feature</th>
+					<th>Normal Nested Grid</th>
+					<th>Subgrid</th>
+				</tr>
+
+				<tr>
+					<td>Own columns</td>
+					<td class="good">Yes</td>
+					<td class="bad">No (inherits parent)</td>
+				</tr>
+
+				<tr>
+					<td>Own rows</td>
+					<td class="good">Yes</td>
+					<td>Optional (can inherit rows too)</td>
+				</tr>
+
+				<tr>
+					<td>Alignment across components</td>
+					<td class="bad">Manual</td>
+					<td class="good">Automatic</td>
+				</tr>
+
+				<tr>
+					<td>Good for card layouts</td>
+					<td>Sometimes</td>
+					<td class="good">Excellent</td>
+				</tr>
+
+				<tr>
+					<td>Good for dashboards</td>
+					<td>Okay</td>
+					<td class="good">Excellent</td>
+				</tr>
+
+				<tr>
+					<td>Complex nested layouts</td>
+					<td>Difficult</td>
+					<td class="good">Much easier</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>Browser Support</h2>
+
+			<div class="support">
+				<p>
+					✅ <strong>Current support is very good.</strong> Modern versions of Chrome, Edge, Firefox, and Safari support
+					<code>subgrid</code>. It has become practical for production use in most modern web applications.
+				</p>
+			</div>
+
+			<div class="warning">
+				<h3>Things to know</h3>
+
+				<ul>
+					<li>A child must already be a <code>display: grid</code> element before using <code>subgrid</code>.</li>
+
+					<li>
+						The child only inherits the parent tracks (columns and/or rows). It does <strong>not</strong> inherit the parent's
+						grid items or placement.
+					</li>
+
+					<li>
+						To inherit columns, use <code>grid-template-columns: subgrid</code>. To inherit rows, use
+						<code>grid-template-rows: subgrid</code>. You can inherit one, the other, or both.
+					</li>
+
+					<li>
+						The child should span the relevant parent tracks (for example, <code>grid-column: span 3;</code>) so the inherited
+						grid has tracks to work with.
+					</li>
+
+					<li>
+						For older browsers that do not support <code>subgrid</code>, provide a fallback by defining explicit
+						<code>grid-template-columns</code> values instead.
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<section>
+			<h2>Summary</h2>
+
+			<p><code>subgrid</code> solves one of CSS Grid's biggest limitations: keeping nested grids perfectly aligned.</p>
+
+			<p>
+				Instead of redefining column sizes over and over, a nested grid can simply inherit the parent's grid tracks, making
+				layouts easier to maintain and far more consistent.
+			</p>
+		</section>
+	</body>
+</html>
