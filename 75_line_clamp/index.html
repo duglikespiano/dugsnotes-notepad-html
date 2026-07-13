@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>CSS line-clamp Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				max-width: 1100px;
+				margin: auto;
+				padding: 40px;
+				line-height: 1.7;
+				background: #f7f7f7;
+			}
+
+			h1,
+			h2 {
+				margin-top: 50px;
+			}
+
+			pre {
+				background: #222;
+				color: #eee;
+				padding: 15px;
+				overflow: auto;
+				border-radius: 8px;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 5px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+
+			th,
+			td {
+				border: 1px solid #bbb;
+				padding: 10px;
+				text-align: left;
+			}
+
+			th {
+				background: #ddd;
+			}
+
+			.note {
+				background: #fff7d6;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin: 25px 0;
+			}
+
+			.demo {
+				background: white;
+				border-radius: 10px;
+				padding: 20px;
+				margin: 25px 0;
+				box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.box {
+				width: 340px;
+				border: 1px solid #999;
+				padding: 15px;
+				margin: 20px 0;
+				background: white;
+			}
+
+			.clamp1,
+			.clamp2,
+			.clamp3,
+			.clamp5 {
+				overflow: hidden;
+
+				/* Widely supported implementation */
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+
+				/* Modern property */
+				line-clamp: inherit;
+			}
+
+			.clamp1 {
+				-webkit-line-clamp: 1;
+				line-clamp: 1;
+			}
+
+			.clamp2 {
+				-webkit-line-clamp: 2;
+				line-clamp: 2;
+			}
+
+			.clamp3 {
+				-webkit-line-clamp: 3;
+				line-clamp: 3;
+			}
+
+			.clamp5 {
+				-webkit-line-clamp: 5;
+				line-clamp: 5;
+			}
+
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+				gap: 20px;
+			}
+
+			.card {
+				background: white;
+				border-radius: 10px;
+				overflow: hidden;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+			}
+
+			.image {
+				height: 130px;
+				background: linear-gradient(45deg, #4e8cff, #8ee7ff);
+			}
+
+			.card-body {
+				padding: 20px;
+			}
+
+			button {
+				margin-top: 15px;
+				padding: 8px 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS <code>line-clamp</code></h1>
+
+		<p>
+			The <strong>line-clamp</strong> property limits how many lines of text are displayed. Extra text is hidden after the
+			specified number of lines.
+		</p>
+
+		<div class="note">
+			<strong>Browser Support</strong>
+
+			<ul>
+				<li>Chrome ✅</li>
+				<li>Edge ✅</li>
+				<li>Safari ✅</li>
+				<li>Firefox ✅ (recent versions)</li>
+			</ul>
+
+			<p>
+				For the best compatibility, continue using
+				<code>-webkit-line-clamp</code>, <code>display:-webkit-box</code>, and <code>-webkit-box-orient:vertical</code>.
+			</p>
+		</div>
+
+		<h2>Syntax</h2>
+
+		<pre>
+.clamped {
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 3;
+
+    /* Optional modern syntax */
+    line-clamp: 3;
+}
+</pre
+		>
+
+		<h2>Comparison Table</h2>
+
+		<table>
+			<tr>
+				<th>Property</th>
+				<th>Effect</th>
+				<th>Typical Use</th>
+			</tr>
+
+			<tr>
+				<td>No clamp</td>
+				<td>Shows entire text</td>
+				<td>Articles, documentation</td>
+			</tr>
+
+			<tr>
+				<td>line-clamp:1</td>
+				<td>Single line + ellipsis</td>
+				<td>Titles</td>
+			</tr>
+
+			<tr>
+				<td>line-clamp:2</td>
+				<td>Maximum 2 lines</td>
+				<td>Cards</td>
+			</tr>
+
+			<tr>
+				<td>line-clamp:3</td>
+				<td>Maximum 3 lines</td>
+				<td>Blog previews</td>
+			</tr>
+
+			<tr>
+				<td>line-clamp:5</td>
+				<td>Maximum 5 lines</td>
+				<td>Long descriptions</td>
+			</tr>
+		</table>
+
+		<h2>Original Text (No Clamp)</h2>
+
+		<div class="demo">
+			<div class="box">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, ipsum vel consequat luctus, libero neque viverra
+				risus, sit amet tristique ipsum erat nec odio. Vivamus feugiat, magna vel fermentum volutpat, turpis ipsum malesuada leo,
+				non gravida lorem erat quis augue. Nulla facilisi. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et
+				netus et malesuada fames ac turpis egestas.
+			</div>
+		</div>
+
+		<h2>line-clamp: 1</h2>
+
+		<div class="demo">
+			<div class="box clamp1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, ipsum vel consequat luctus, libero neque viverra
+				risus, sit amet tristique ipsum erat nec odio. Vivamus feugiat, magna vel fermentum volutpat, turpis ipsum malesuada leo.
+			</div>
+		</div>
+
+		<h2>line-clamp: 2</h2>
+
+		<div class="demo">
+			<div class="box clamp2">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, ipsum vel consequat luctus, libero neque viverra
+				risus, sit amet tristique ipsum erat nec odio. Vivamus feugiat, magna vel fermentum volutpat, turpis ipsum malesuada leo.
+			</div>
+		</div>
+
+		<h2>line-clamp: 3</h2>
+
+		<div class="demo">
+			<div class="box clamp3">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, ipsum vel consequat luctus, libero neque viverra
+				risus, sit amet tristique ipsum erat nec odio. Vivamus feugiat, magna vel fermentum volutpat, turpis ipsum malesuada leo.
+			</div>
+		</div>
+
+		<h2>line-clamp: 5</h2>
+
+		<div class="demo">
+			<div class="box clamp5">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, ipsum vel consequat luctus, libero neque viverra
+				risus, sit amet tristique ipsum erat nec odio. Vivamus feugiat, magna vel fermentum volutpat, turpis ipsum malesuada leo,
+				non gravida lorem erat quis augue. Nulla facilisi. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et
+				netus et malesuada fames ac turpis egestas.
+			</div>
+		</div>
+
+		<h2>Real-world Example: Blog Cards</h2>
+
+		<p>Notice how every card has the same height even though the text lengths are different.</p>
+
+		<div class="cards">
+			<div class="card">
+				<div class="image"></div>
+				<div class="card-body">
+					<h3>Short Article</h3>
+
+					<p class="clamp3">This article is very short.</p>
+
+					<button>Read More</button>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="image"></div>
+				<div class="card-body">
+					<h3>Medium Article</h3>
+
+					<p class="clamp3">
+						This article contains a little more information. Without line-clamp, this card would become taller than the others and
+						make the grid uneven.
+					</p>
+
+					<button>Read More</button>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="image"></div>
+				<div class="card-body">
+					<h3>Very Long Article</h3>
+
+					<p class="clamp3">
+						This article contains a large amount of text. Using line-clamp allows every card to remain the same height while still
+						showing enough preview text for users to understand what the article is about before clicking to read the full
+						content.
+					</p>
+
+					<button>Read More</button>
+				</div>
+			</div>
+		</div>
+
+		<h2>When Should You Use It?</h2>
+
+		<ul>
+			<li>✅ Product cards</li>
+			<li>✅ News websites</li>
+			<li>✅ Blog previews</li>
+			<li>✅ Social media feeds</li>
+			<li>✅ Uniform grid layouts</li>
+		</ul>
+
+		<h2>Things to Remember</h2>
+
+		<ul>
+			<li><code>line-clamp</code> only affects multi-line text.</li>
+			<li>Always combine it with <code>overflow:hidden</code>.</li>
+			<li>
+				For maximum browser compatibility, include:
+				<ul>
+					<li><code>display:-webkit-box</code></li>
+					<li><code>-webkit-box-orient:vertical</code></li>
+					<li><code>-webkit-line-clamp</code></li>
+				</ul>
+			</li>
+			<li>
+				Unlike <code>text-overflow: ellipsis</code>, which works for a single line, <code>line-clamp</code> can truncate multiple
+				lines.
+			</li>
+			<li>
+				The clipped text still exists in the DOM and can be copied or accessed by assistive technologies depending on the context.
+			</li>
+		</ul>
+	</body>
+</html>
