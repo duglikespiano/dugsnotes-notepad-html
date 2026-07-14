@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS writing-mode Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				margin: 40px;
+				line-height: 1.6;
+				background: #f5f5f5;
+			}
+
+			h1,
+			h2 {
+				margin-top: 50px;
+			}
+
+			section {
+				margin: 40px 0;
+			}
+
+			.note {
+				background: #fff7d6;
+				border-left: 5px solid orange;
+				padding: 15px;
+				margin-bottom: 25px;
+			}
+
+			.grid {
+				display: flex;
+				gap: 30px;
+				flex-wrap: wrap;
+			}
+
+			.demo {
+				background: white;
+				border: 1px solid #ccc;
+				padding: 20px;
+				width: 260px;
+			}
+
+			.box {
+				border: 2px solid royalblue;
+				background: #eef4ff;
+				height: 220px;
+				padding: 15px;
+				overflow: auto;
+			}
+
+			.default {
+				writing-mode: horizontal-tb;
+			}
+
+			.verticalRL {
+				writing-mode: vertical-rl;
+			}
+
+			.verticalLR {
+				writing-mode: vertical-lr;
+			}
+
+			.sidewaysRL {
+				writing-mode: sideways-rl;
+			}
+
+			.sidewaysLR {
+				writing-mode: sideways-lr;
+			}
+
+			.compare {
+				display: flex;
+				gap: 50px;
+				align-items: flex-start;
+				margin-top: 20px;
+			}
+
+			.compare .sample {
+				width: 220px;
+				height: 220px;
+				border: 2px solid #444;
+				padding: 15px;
+				background: white;
+			}
+
+			.table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-top: 20px;
+			}
+
+			.table th,
+			.table td {
+				border: 1px solid #bbb;
+				padding: 10px;
+				text-align: left;
+			}
+
+			.badge {
+				display: inline-block;
+				background: #1976d2;
+				color: white;
+				padding: 4px 8px;
+				border-radius: 5px;
+				font-size: 13px;
+			}
+
+			.label-container {
+				display: flex;
+				gap: 30px;
+				align-items: flex-start;
+				margin-top: 25px;
+			}
+
+			.label {
+				writing-mode: vertical-rl;
+				background: #1976d2;
+				color: white;
+				padding: 12px;
+				font-weight: bold;
+			}
+
+			.card {
+				border: 1px solid #ccc;
+				background: white;
+				padding: 20px;
+				width: 250px;
+			}
+
+			pre {
+				background: #222;
+				color: #ddd;
+				padding: 15px;
+				overflow: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS writing-mode</h1>
+
+		<div class="note">
+			<strong>What does writing-mode do?</strong>
+
+			<p>
+				It changes how text flows. Instead of writing text left-to-right, you can make it flow vertically, just like traditional
+				Japanese books or magazine side labels.
+			</p>
+
+			<p>The property changes the <strong>block flow direction</strong>, not merely the text direction.</p>
+		</div>
+
+		<h2>Comparison of every writing-mode</h2>
+
+		<div class="grid">
+			<div class="demo">
+				<h3>horizontal-tb</h3>
+
+				<div class="box default">
+					This is the default writing mode. Text goes left to right. New lines appear underneath the previous line.
+				</div>
+
+				<pre>writing-mode: horizontal-tb;</pre>
+			</div>
+
+			<div class="demo">
+				<h3>vertical-rl</h3>
+
+				<div class="box verticalRL">
+					This is vertical text. Columns begin on the right side. This is commonly used for Japanese books.
+				</div>
+
+				<pre>writing-mode: vertical-rl;</pre>
+			</div>
+
+			<div class="demo">
+				<h3>vertical-lr</h3>
+
+				<div class="box verticalLR">
+					This is vertical text. Columns begin on the left side instead. Notice how the column order changes.
+				</div>
+
+				<pre>writing-mode: vertical-lr;</pre>
+			</div>
+
+			<div class="demo">
+				<h3>sideways-rl</h3>
+
+				<div class="box sidewaysRL">
+					Instead of rotating each character, the whole line is rotated sideways. Browser support is still limited.
+				</div>
+
+				<pre>writing-mode: sideways-rl;</pre>
+			</div>
+
+			<div class="demo">
+				<h3>sideways-lr</h3>
+
+				<div class="box sidewaysLR">This value has very limited browser support. Many browsers will ignore it or fall back.</div>
+
+				<pre>writing-mode: sideways-lr;</pre>
+			</div>
+		</div>
+
+		<h2>Visual Difference</h2>
+
+		<div class="compare">
+			<div class="sample">
+				<p><span class="badge">Default</span></p>
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna.
+			</div>
+
+			<div class="sample verticalRL">
+				<p><span class="badge">vertical-rl</span></p>
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna.
+			</div>
+		</div>
+
+		<h2>Real-world Example: Vertical Sidebar Label</h2>
+
+		<div class="label-container">
+			<div class="label">FEATURED</div>
+
+			<div class="card">
+				<h3>Article Title</h3>
+
+				<p>Many websites use vertical labels for categories, promotions, magazine layouts, or image captions.</p>
+			</div>
+		</div>
+
+		<h2>Browser Support</h2>
+
+		<table class="table">
+			<tr>
+				<th>Value</th>
+				<th>Support</th>
+			</tr>
+
+			<tr>
+				<td>horizontal-tb</td>
+				<td>Excellent</td>
+			</tr>
+
+			<tr>
+				<td>vertical-rl</td>
+				<td>Excellent</td>
+			</tr>
+
+			<tr>
+				<td>vertical-lr</td>
+				<td>Excellent</td>
+			</tr>
+
+			<tr>
+				<td>sideways-rl</td>
+				<td>Partial</td>
+			</tr>
+
+			<tr>
+				<td>sideways-lr</td>
+				<td>Poor / Experimental</td>
+			</tr>
+		</table>
+
+		<h2>When should you use writing-mode?</h2>
+
+		<ul>
+			<li>Japanese, Chinese, or Mongolian vertical writing</li>
+			<li>Magazine-style layouts</li>
+			<li>Vertical navigation labels</li>
+			<li>Ribbon badges</li>
+			<li>Timeline labels</li>
+			<li>Creative UI components</li>
+		</ul>
+
+		<h2>writing-mode vs transform: rotate()</h2>
+
+		<table class="table">
+			<tr>
+				<th>writing-mode</th>
+				<th>transform: rotate()</th>
+			</tr>
+
+			<tr>
+				<td>Changes how text is laid out.</td>
+				<td>Only rotates the rendered element.</td>
+			</tr>
+
+			<tr>
+				<td>Selection and cursor behave naturally.</td>
+				<td>Text selection can feel awkward.</td>
+			</tr>
+
+			<tr>
+				<td>Line wrapping still works.</td>
+				<td>Layout remains horizontal before rotation.</td>
+			</tr>
+
+			<tr>
+				<td>Best for actual vertical writing.</td>
+				<td>Best for decorative rotation.</td>
+			</tr>
+		</table>
+
+		<h2>Summary</h2>
+
+		<ul>
+			<li><strong>horizontal-tb</strong> → Normal web pages.</li>
+			<li><strong>vertical-rl</strong> → Traditional Japanese vertical writing.</li>
+			<li><strong>vertical-lr</strong> → Vertical writing starting from the left.</li>
+			<li><strong>sideways-rl</strong> → Rotates whole lines sideways (limited support).</li>
+			<li><strong>sideways-lr</strong> → Experimental with poor support.</li>
+			<li>Use <strong>writing-mode</strong> when the document should actually flow vertically, not simply appear rotated.</li>
+		</ul>
+	</body>
+</html>
