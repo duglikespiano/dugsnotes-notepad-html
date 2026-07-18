@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CSS ch Unit Demo</title>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: system-ui, sans-serif;
+				line-height: 1.6;
+				margin: 40px;
+				background: #f5f5f5;
+			}
+
+			section {
+				background: white;
+				padding: 25px;
+				margin-bottom: 35px;
+				border-radius: 12px;
+			}
+
+			.demo {
+				margin: 15px 0;
+				padding: 15px;
+				border: 2px solid royalblue;
+				background: #eef5ff;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 20px;
+			}
+
+			pre {
+				background: #222;
+				color: #fff;
+				padding: 15px;
+				overflow: auto;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			td,
+			th {
+				border: 1px solid #ccc;
+				padding: 10px;
+			}
+
+			.code {
+				font-family: monospace;
+				background: #eee;
+				padding: 2px 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSS <code>ch</code> Unit</h1>
+
+		<p>The <strong>ch</strong> unit represents the width of the "0" (zero) character of the current font.</p>
+
+		<hr />
+
+		<section>
+			<h2>1. Different ch Widths</h2>
+
+			<div class="demo" style="width: 10ch">width:10ch</div>
+
+			<div class="demo" style="width: 20ch">width:20ch</div>
+
+			<div class="demo" style="width: 30ch">width:30ch</div>
+
+			<div class="demo" style="width: 40ch">width:40ch</div>
+
+			<pre>
+width:10ch;
+width:20ch;
+width:30ch;
+width:40ch;
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>2. Compare ch vs px</h2>
+
+			<div class="grid">
+				<div>
+					<h3>20ch</h3>
+
+					<div class="demo" style="width: 20ch">The width depends on the font.</div>
+				</div>
+
+				<div>
+					<h3>200px</h3>
+
+					<div class="demo" style="width: 200px">The width is always 200 pixels.</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>3. Compare Different Fonts</h2>
+
+			<div class="grid">
+				<div>
+					<h3>Monospace</h3>
+
+					<div class="demo" style="font-family: monospace; width: 20ch">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				</div>
+
+				<div>
+					<h3>Arial</h3>
+
+					<div class="demo" style="font-family: Arial, sans-serif; width: 20ch">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				</div>
+
+				<div>
+					<h3>Georgia</h3>
+
+					<div class="demo" style="font-family: Georgia, serif; width: 20ch">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+				</div>
+			</div>
+
+			<p>Notice that the actual width changes because the width of the "0" character changes with the font.</p>
+		</section>
+
+		<section>
+			<h2>4. Font Size Also Changes ch</h2>
+
+			<div class="demo" style="font-size: 16px; width: 20ch">16px font</div>
+
+			<div class="demo" style="font-size: 24px; width: 20ch">24px font</div>
+
+			<div class="demo" style="font-size: 36px; width: 20ch">36px font</div>
+
+			<p>Since <code>ch</code> is relative to the current font, larger font sizes create larger widths.</p>
+		</section>
+
+		<section>
+			<h2>5. Best Practice: Readable Paragraph Width</h2>
+
+			<p>
+				Very long lines are difficult to read. Using <code>max-width:65ch</code> keeps each line around 65 characters, which is
+				considered comfortable for reading.
+			</p>
+
+			<div class="demo" style="max-width: 65ch">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate, massa ut viverra feugiat, turpis sapien
+				pretium nibh, vitae malesuada ligula neque sed lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+				posuere cubilia curae.
+			</div>
+
+			<pre>
+max-width:65ch;
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>6. Perfect for Input Fields</h2>
+
+			<p>You can size an input based on approximately how many characters the user should type.</p>
+
+			<input style="width: 10ch" placeholder="10ch" />
+
+			<br /><br />
+
+			<input style="width: 20ch" placeholder="20ch" />
+
+			<br /><br />
+
+			<input style="width: 40ch" placeholder="40ch" />
+
+			<pre>
+input{
+    width:20ch;
+}
+</pre
+			>
+		</section>
+
+		<section>
+			<h2>7. Compare em, rem, %, vw and ch</h2>
+
+			<table>
+				<tr>
+					<th>Unit</th>
+					<th>Meaning</th>
+					<th>Based On</th>
+				</tr>
+
+				<tr>
+					<td>px</td>
+					<td>Fixed pixels</td>
+					<td>Screen pixels</td>
+				</tr>
+
+				<tr>
+					<td>em</td>
+					<td>Relative</td>
+					<td>Parent font size</td>
+				</tr>
+
+				<tr>
+					<td>rem</td>
+					<td>Relative</td>
+					<td>Root font size</td>
+				</tr>
+
+				<tr>
+					<td>%</td>
+					<td>Relative</td>
+					<td>Parent element</td>
+				</tr>
+
+				<tr>
+					<td>vw</td>
+					<td>Relative</td>
+					<td>Viewport width</td>
+				</tr>
+
+				<tr style="background: #dfffe0">
+					<td><strong>ch</strong></td>
+					<td>Width of "0"</td>
+					<td>Current font</td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<h2>8. ch Is NOT Character Count</h2>
+
+			<div class="demo" style="font-family: Arial; width: 20ch">iiiiiiiiiiiiiiiiiiii</div>
+
+			<div class="demo" style="font-family: Arial; width: 20ch">WWWWWWWWWWWWWWWWWWWW</div>
+
+			<p>
+				Both boxes are <strong>20ch</strong>, but the text occupies different amounts of space because "i" is much narrower than
+				"W". The width is based on the size of the <strong>0</strong> character, not on the average width of all characters.
+			</p>
+		</section>
+
+		<section>
+			<h2>9. Browser Support</h2>
+
+			<p>✅ Supported by all modern browsers:</p>
+
+			<ul>
+				<li>Chrome</li>
+				<li>Edge</li>
+				<li>Firefox</li>
+				<li>Safari</li>
+				<li>Mobile browsers</li>
+			</ul>
+
+			<p>The <code>ch</code> unit has been widely supported for many years, making it safe to use in production.</p>
+		</section>
+	</body>
+</html>
